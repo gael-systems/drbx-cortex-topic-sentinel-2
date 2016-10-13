@@ -1,1 +1,50 @@
-C'est chouette!
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>fr.gael.cortex</groupId>
+   <artifactId>drbx-cortex-topic-sentinel-2</artifactId>
+   <packaging>pom</packaging>
+   <version>1.0.0</version>
+
+   <name>Cortex Topics for Sentinel-2</name>
+
+   <parent>
+      <groupId>fr.gael</groupId>
+      <artifactId>maven</artifactId>
+      <version>1-0-rc-4</version>
+   </parent>
+
+   <modules>
+      <module>commons</module>
+      <module>user-commons</module>
+      <module>user-level-1c</module>
+      <!--
+      <module>user-level-0</module>
+      <module>user-level-1a</module>
+      <module>user-level-1b</module>
+      <module>user-level-1c</module>
+      <module>user-level-2a</module>
+      <module>pdi-commons</module>
+      <module>pdi-level-0</module>
+      <module>pdi-level-1a</module>
+      <module>pdi-level-1b</module>
+      <module>pdi-level-1c</module>
+      <module>pdi-level-2a</module>
+      -->
+   </modules>
+
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <configuration>
+               <skip>true</skip>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>
