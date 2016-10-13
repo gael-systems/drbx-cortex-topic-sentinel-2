@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<!DOCTYPE rdf:RDF [
+   <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+   <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+   <!ENTITY s2   "http://www.esa.int/s2#">
+   <!ENTITY drb "http://www.gael.fr/drb#">
+   <!ENTITY jpeg "http://www.gael.fr/drb/jpeg#">
+   <!ENTITY jpeg2000 "http://www.gael.fr/drb/jpeg2000#">
+]>
+
+<rdf:RDF xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;"
+         xmlns:drb="&drb;"
+         xmlns:jpeg="&jpeg;"
+         xmlns:jpeg2000="&jpeg2000;"
+         xmlns:s2="&s2;"
+         xml:base="&s2;">
+
+<!--
+* Data Hub Service (DHuS) - For Space data distribution.
+* Copyright (C) 2013,2014,2015,2016 GAEL Systems
+*
+* This file is part of DHuS software sources.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+   <owl:Ontology rdf:about="&s2;">
+      <rdfs:label xml:lang="en">Sentinel-2 User Products Level-1C Ontology</rdfs:label>
+   </owl:Ontology>
+
+   <!-- =================================================================== -->
+   <!--                                                                     -->
+   <!-- Products                                                            -->
+   <!--                                                                     -->
+   <!-- =================================================================== -->
+
+   <!-- ============================ -->
+   <!-- User Level-1C Product        -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
+   <owl:Class rdf:about="&s2;userProductLevel1C">
+      <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1C</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Level-1C is an orthoimage product, i.e. a map projection of the
+         acquired image using a system DEM to correct ground geometric
+         distortions. Pixel radiometric measurements are provided in
+         Top-Of-Atmosphere (TOA) reflectances with all parameters to transform
+         them into radiances.
+         Level-1C products are resampled with a constant GSD (Ground Sampling
+         Distance) of 10m, 20m, 60m according to the native resolution of the
+         different spectral bands.
+         The following list introduces the input data of Level-1C processing:
+         * Input of Level-1C processing - Metadata: Metadata from Level-1B
+         product.
+         * Input of Level-1C processing - Image Data: Radiometrically and
+         geometrically corrected image data.
+         * Input of Level-1C processing - Ancillary Data: Ancillary data from
+         the Level-1B (satellite and ground ancillary data, including the
+         refined geometric model).
+         * Input of Level-1C processing - Auxiliary Data: GIPP: Parameters from
+         Level-1B complemented by radiometric and geometric processing
+         parameters.
+         * Input of Level-1C processing - Quality Indicator Data: Quality
+         indicator files from Level-1B.
+         Note that one Level-1C product:
+         * refers always to one Datatake;
+         * refer to one or several Datastrip from the same Datatake;
+         * may cover the full Datatake or an extract of the Datatake.
+         In the case of an extract, the image data are provided to cover the
+         selected extract only. In any case (full or extract of Datatake), the
+         ancillary data, referenced through the product metadata file, are
+         always provided on the temporal extent of the full Datatake.
+         By default, Level-1C is geometrically refined. Some Level-1C may not
+         be geometrically refined (e.g. for Cal/Val purposes). These products
+         are identified with a dedicated flag in the metadata.
+         The Level-1C User product consists of:
+         1. Product_Metadata_File: This is the mandatory XML main metadata file
+         (DIMAP) containing the requested level of information and referring
+         all the product elements.
+         2. manifest.safe: this is the SAFE metadata file (optional). It is
+         included in the product only if the user requests the product to be
+         SAFE formatted (according to a specific download option).
+         3. GRANULE: this folder (the name is chosen for homogeneity with
+         respect to the other user product) contains the tiles composing the
+         product (Image Data).
+         4. DATASTRIP: folder containing the Datastrip composing the product
+         linked to the selected tiles.
+         5. AUX_DATA: folder containing the auxiliary data items used for the
+         Level-1C processing. GIPP files and IERS bulletin are provided with
+         the product only if requested by the user. In addition, the Level-1C
+         embeds always an elementary set of meteorological datasets extracted
+         and resampled from ECMWF forecast output. In any case, all the
+         auxiliary data files are referenced in the XML Main metadata file .
+         6. Preview_Image: file consisting of an image limited to 3
+         visible-bands in ground geometry at 320m resolution. This file,
+         provided if requested by the user, gives an overview of the product
+         (sub-sampled) mainly for image data browsing and selection purposes,
+         7. rep_info: folder containing the XSD schema provided inside the
+         product. This folder is optional. It will be included in the final
+         product if the user select the SAFE format as output format.
+         8. INSPIRE: XML INSPIRE metadata file.
+      </rdfs:comment>
+       <rdfs:subClassOf rdf:resource="&s2;userProduct"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(S2A|S2B)_(OPER|TEST)_PRD_MSIL1C_([A-Z]{4})_(\d{4})([0-1])([0-9])[0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_R(\d{3})_V(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9].SAFE</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =================================================================== -->
+   <!--                                                                     -->
+   <!-- User Product Level-1C Structure (Floor 1)                           -->
+   <!--                                                                     -->
+   <!-- =================================================================== -->
+
+   <!-- ============================ -->
+   <!-- Metadata File (Level-1C)     -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1cMetadataFile">
+      <rdfs:label xml:lang="en">User Product Level-1C: Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML metadata file provided inside the S2 Level-1C User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L1C_PDMC.*</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/TODO.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Metadata XSD (Level-1C)      -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1cMetadataXsd">
+      <rdfs:label xml:lang="en">User Product Level-1C: Metadata XML Schema</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML schema describing the metadata file provided inside the S2 Level-1C User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2_User_Product_Level-1C_Metadata.xsd</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProductRepresentationInformationFolder</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Granule Folder (Level-1C)    -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1cGranuleFolder">
+      <rdfs:label xml:lang="en">User Product Level-1C: Granule Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         GRANULE folder contains the list of folders each one corresponding to
+         the granules composing the user product.
+         Level-1C User product: this folder (the name is chosen for homogeneity
+         with respect to the other user product) contains the tiles composing
+         the product (Image Data).
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;userProductGranuleFolder"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>GRANULE</drb:nameTest>
+         <drb:parentClassTest>&s2;userProductLevel1C</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Datastrip Folder (Level-1C)  -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1cDatastripFolder">
+      <rdfs:label xml:lang="en">User Product Level-1C: Datastrip Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         DATASTRIP folder contains the list of folders each one corresponding
+         to the Datastrips composing the user product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;userProductDatastripFolder"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>DATASTRIP</drb:nameTest>
+         <drb:parentClassTest>&s2;userProductLevel1C</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Auxiliary Data Folder (Level-1C) -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1cAuxiliaryDataFolder">
+      <rdfs:label xml:lang="en">User Product Level-1C: Auxiliary Data Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         AUX_DATA folder contains the auxiliary data files used for the 
+         processing.
+         Folder containing auxiliary data items needed for processing and 
+         provided with the product on request by the user. Some auxiliary data
+         (for instance IERS Bullettin and GIPPs files) can be provided either
+         with the product (if selected according to a specific download option)
+         or external to the product (referenced through the
+         Product_Metadata_File), others are only external to the product (for
+         instance the DEM used for the processing); in any case, all these
+         auxiliary data files are referenced in the XML Main metadata file.
+         In addition, the Level-1C embeds always an elementary set of
+         meteorological datasets extracted and resampled from ECMWF forecast
+         output.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;userProductAuxiliaryDataFolder"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>AUX_DATA</drb:nameTest>
+         <drb:parentIsSubClassTest>&s2;userProductLevel1C</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Preview Image File (Level-1C) -->
+   <!-- ============================ -->
+
+   <!-- TODO TBC un PNG? -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1cPreviewImageFile">
+      <rdfs:label xml:lang="en">User Product Level-1C: Preview Image File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         File consisting of an image limited to 3 visible-bands in ground
+         geometry at 320m resolution. This file, provided if required by the
+         user, gives an overview of the product (sub-sampled) mainly for image
+         data browsing and selection purposes.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;userProductPreviewImageFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <!-- TBC l'extension devrait etre jp2 cf spec V06 p280) -->
+         <drb:nameMatch>S2[AB]_...._PVI_MSI(L1C|TCI)_\d{3}_\d{14}_\d{14}_\d{4}\.(?i)jp[g2x]</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProductLevel1C</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+</rdf:RDF>

@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+
+<!DOCTYPE rdf:RDF [
+   <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+   <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+   <!ENTITY s2   "http://www.esa.int/s2#">
+   <!ENTITY drb "http://www.gael.fr/drb#">
+   <!ENTITY jpeg2000 "http://www.gael.fr/drb/jpeg2000#">
+]>
+
+<!--
+* Data Hub Service (DHuS) - For Space data distribution.
+* Copyright (C) 2013,2014,2015,2016 GAEL Systems
+*
+* This file is part of DHuS software sources.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<rdf:RDF xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;"
+         xmlns:drb="&drb;"
+         xmlns:jpeg2000="&jpeg2000;"
+         xmlns:s2="&s2;"
+         xml:base="&s2;">
+
+   <owl:Ontology rdf:about="&s2;">
+      <rdfs:label xml:lang="en">Sentinel-2 Commons Ontology</rdfs:label>
+   </owl:Ontology>
+
+   <!-- =================================================================== -->
+   <!--                                                                     -->
+   <!-- Products                                                            -->
+   <!--                                                                     -->
+   <!-- =================================================================== -->
+
+   <!-- ============================ -->
+   <!-- Product                      -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;product">
+      <rdfs:label xml:lang="en">Sentinel-2 Product</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Sentinel-2 product
+      </rdfs:comment>
+     <rdfs:subClassOf rdf:resource="&drb;item"/>
+     <rdfs:subClassOf rdf:resource="&drb;safe-product"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =========================================== -->
+   <!-- Under GRANULE Folder                        -->
+   <!-- =========================================== -->
+
+   <!-- ============================ -->
+   <!-- Granule Container            -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;granuleContainer">
+      <rdfs:label xml:lang="en">Granule Container</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the granules composing the User Product. 
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;granuleFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Image Data Folder            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_image_folder"> -->
+   <owl:Class rdf:about="&s2;imageFolder">
+      <rdfs:label xml:lang="en">Image Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Folder containing the image data foreseen for each kind of Granule /
+         Tile.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>IMG_DATA</drb:nameTest>
+         <drb:parentClassTest>&s2;granuleContainer</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =========================================== -->
+   <!-- Under DATASTRIP Folder                      -->
+   <!-- =========================================== -->
+
+   <!-- ============================ -->
+   <!-- Datastrip Container          -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;datastripContainer">
+      <rdfs:label xml:lang="en">Datastrip Container</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the datastrips composing the User Product. 
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;userProductDatastripFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =========================================== -->
+   <!-- Under GRANULE or DATASTRIP Folder           -->
+   <!-- =========================================== -->
+
+   <!-- ============================ -->
+   <!-- Quality Control Folder       -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_quality_folder"> -->
+   <owl:Class rdf:about="&s2;qualityControlFolder">
+      <rdfs:label xml:lang="en">Quality Control Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Folder containing the XML reports including the quality control checks
+         performed by OLQC processor (for each L0/L1A/L1B/L1C PDI) and the GML
+         quality masks (for each L1A/L1B/L1C PDI). In addition, in case of L1C
+         Tile, this folder contains the PVI file.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>QI_DATA</drb:nameTest>
+         <drb:parentClassTest>&s2;granuleContainer</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control File         -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_quality_control_file"> -->
+   <owl:Class rdf:about="&s2;qualityControlFile">
+      <rdfs:label xml:lang="en">Quality Control File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Quality control report file contains detected errors in this product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._.*_(?i)report\.xml</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/olqc-report/OLQC_Report.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control File         -->
+   <!-- General Quality              -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;qualityControlFileGeneralQuality">
+      <rdfs:label xml:lang="en">Quality Control File: General Quality</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         General Quality Control File.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._.*_GENERAL_QUALITY_(?i)report\.xml</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/olqc-report/OLQC_Report.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control File         -->
+   <!-- Geometric Quality            -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;qualityControlFileGeometricQuality">
+      <rdfs:label xml:lang="en">Quality Control File: Geometric Quality</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Geometric Quality Control File.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._.*_GEOMETRIC_QUALITY_(?i)report\.xml</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/olqc-report/OLQC_Report.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control File         -->
+   <!-- Radiometric Quality          -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;qualityControlFileRadiometricQuality">
+      <rdfs:label xml:lang="en">Quality Control File: Radiometric Quality</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Radiometric Quality Control File.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._.*_RADIOMETRIC_QUALITY_(?i)report\.xml</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/olqc-report/OLQC_Report.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control File         -->
+   <!-- Sensor Quality               -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;qualityControlFileSensorQuality">
+      <rdfs:label xml:lang="en">Quality Control File: Sensor Quality</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Sensor Quality Control File.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._.*_SENSOR_QUALITY_(?i)report\.xml</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/olqc-report/OLQC_Report.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control File         -->
+   <!-- Format Correctness           -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;qualityControlFileFormatCorrectnessQuality">
+      <rdfs:label xml:lang="en">Quality Control File: Format Correctness Quality</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Format Correctness Quality Control File.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._.*_FORMAT_CORRECTNESS_(?i)report\.xml</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>
+          xsd/olqc-report/OLQC_Report.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File                    -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_mask_file"> -->
+    <owl:Class rdf:about="&s2;maskFile">
+      <rdfs:label xml:lang="en">Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Mask file.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_.*\.gml</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: CLOLOW            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clolow_mask_file"> -->
+   <owl:Class rdf:about="&s2;clolowMaskFile">
+      <rdfs:label xml:lang="en">Coarse Cloud Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         These vector files (derived from cloud detection using the preliminary
+         quicklook images), contain a list of polygons in sensor mask  geometry
+         (Level-1A reference frame) indicating the presence of clouds on the 
+         images.
+         Present in Level 1A and 1B products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_CLOLOW.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: CLOUDS            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
+   <owl:Class rdf:about="&s2;cloudsMaskFile">
+      <rdfs:label xml:lang="en">Finer Cloud Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A finer cloud mask is computed on final Level-1C images. It is
+         provided in the final reference frame (ground geometry).
+         Present in Level 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_CLOUDS.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: TECQUA            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
+   <owl:Class rdf:about="&s2;tecquaMaskFile">
+      <rdfs:label xml:lang="en">Technical Quality Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         These vector files contain a list of polygons in Level-1A reference
+         frame indicating degraded quality areas in the image.
+         Present in Level 1A, 1B and 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_TECQUA.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: LANWAT            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_lanwat_mask_file"> -->
+   <owl:Class rdf:about="&s2;lanwatMaskFile">
+      <rdfs:label xml:lang="en">Land/Water Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A land/water mask is computed on final Level-1C images. It is provided
+         in the final reference frame (ground geometry).
+         Present in Level 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_LANWAT.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: DETFOO            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_detfoo_mask_file"> -->
+   <owl:Class rdf:about="&s2;detfooMaskFile">
+      <rdfs:label xml:lang="en">Detector Footprint Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A mask providing the ground footprint of each detector within a tile.
+         Present in Level 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_DETFOO.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: DEFECT            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_defect_mask_file"> -->
+   <owl:Class rdf:about="&s2;defectMaskFile">
+      <rdfs:label xml:lang="en">Defective Pixels Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A defective pixels' mask, containing the position of defective pixels.
+         Present in Level 1A, 1B and 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_DEFECT.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: SATURA            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_satura_mask_file"> -->
+   <owl:Class rdf:about="&s2;saturaMaskFile">
+      <rdfs:label xml:lang="en">Saturated pixels Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A defective pixels' mask, containing the position of saturated pixels.
+         Present in Level 1A, 1B and 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_SATURA.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: NODATA            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_nodata_mask_file"> -->
+   <owl:Class rdf:about="&s2;nodataMaskFile">
+      <rdfs:label xml:lang="en">Nodata Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A defective pixels' mask, containing the position of pixels with no
+         data.
+         Present in Level 1A, 1B and 1C products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_NODATA.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Mask File: DEMQUA            -->
+   <!-- ============================ -->
+
+   <!-- TODO TBD Does this file-type exists??? Not in the last-of spec.... -->
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_demqua_mask_file"> -->
+   <owl:Class rdf:about="&s2;demquaMaskFile">
+      <rdfs:label xml:lang="en">DEM Quality Mask File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         DEM quality mask transformed in the final reference frame.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MSK_DEMQUA.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =================================================================== -->
+   <!--                                                                     -->
+   <!-- Level-1C                                                            -->
+   <!--                                                                     -->
+   <!-- =================================================================== -->
+
+   <!-- =========================================== -->
+   <!-- Under GRANULE Folder (Level-1C)             -->
+   <!-- =========================================== -->
+
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_level_1c_tile_container"> -->
+   <owl:Class rdf:about="&s2;level1cGranuleContainer">
+      <rdfs:label xml:lang="en">Level-1C: Granule Container</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the granules composing the User Product Level-1C.
+         There are N granules-folders each one corresponding to the Tiles
+         composing the product.
+         The PDI Level-1C Tile consist of: 
+         1. Level-1C_Tile_Metadata_File (Tile Metadata): XML Main Metadata 
+             file (DIMAP mandatory file) containing the requested level of  
+             information and referring all the product elements describing the 
+             tile,
+         2. IMG_DATA: folder containing image data files compressed using the 
+            JPEG2000 algorithm, one file per band.
+         3. QI_DATA: folder containing OLQC XML reports of quality checks, mask
+            files and PVI file;
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granuleContainer"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;userProductLevel1cGranuleFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Image Data Folder (Level-1C) -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_image_folder"> -->
+   <owl:Class rdf:about="&s2;level1cImageFolder">
+      <rdfs:label xml:lang="en">Level-1C: Image Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         During the Level-1C User Product generation, according to the Spectral
+         Bands download options, the IMG_DATA folder can contain a set of bands
+         and/or the TCI corresponding to the Tile. The TCI can be requested
+         into the User Product even if no other spectral band data has been
+         selected.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;imageFolder"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>IMG_DATA</drb:nameTest>
+         <drb:parentClassTest>&s2;level1cGranuleContainer</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Tile Image File (Level-1C)   -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_image_file"> -->
+   <owl:Class rdf:about="&s2;level1ciTileImageFile">
+      <rdfs:label xml:lang="en">Level-1C: Tile Image File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One JPEG2000 file per band.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L1C_.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)jp2</drb:nameMatch>
+         <drb:parentClassTest>&s2;level1cImageFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Quality Control Folder (Level-1C) -->
+   <!-- ============================ -->
+
+   <owl:Class rdf:about="&s2;level1cQualityControlFolder">
+      <rdfs:label xml:lang="en">Level-1C: Quality Control Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Folder containing the XML reports including the quality control checks
+         performed by OLQC processor (for each L0/L1A/L1B/L1C PDI) and the GML
+         quality masks (for each L1A/L1B/L1C PDI). In addition, in case of L1C
+         Tile, this folder contains the PVI file.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;qualityControlFolder"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>QI_DATA</drb:nameTest>
+         <drb:parentClassTest>&s2;level1cGranuleContainer</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================= -->
+   <!-- Tile Metadata Files (Level-1C)    -->
+   <!-- ================================= -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_tile_metadata"> -->
+   <owl:Class rdf:about="&s2;level1cGranuleMetadataFile">
+      <rdfs:label xml:lang="en">Level-1C: Granule Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The main XML metadata file provided inside each Level-1C tile.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level1cGranuleContainer</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MTD_L1C_TL_.*</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Tile_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- =========================================== -->
+   <!-- Under DATASTRIP Folder (Level-1C)           -->
+   <!-- =========================================== -->
+
+   <!-- ================================ -->
+   <!-- Datastrip Container (Level-1C)   -->
+   <!-- ================================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_container"> -->
+   <owl:Class rdf:about="&s2;level1cDatastripContainer">
+      <rdfs:label xml:lang="en">Level-1C: Datastrip Container</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the datastrips for User Product Level-1C.
+         The PDI Level 1C DataStrip consist of:
+         1. DataStrip_Metadata_File: XML Main Metadata file (DIMAP mandatory
+            file) containing the requested level of information and referring all
+            the product elements describing the DataStrip.
+         2. QI_DATA: folder containing XML reports providing Quality control
+            checks information.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastripContainer"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L1C_DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;userProductLevel1cDatastripFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================ -->
+   <!-- Datastrip Metadata File (Level-1C) -->
+   <!-- ================================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_metadata"> -->
+   <owl:Class rdf:about="&s2;level1cDatastripMetadataFile">
+      <rdfs:label xml:lang="en">Level-1C: Datastrip Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML Main Metadata file (DIMAP mandatory file) containing the requested
+         level of information and referring all the product elements describing
+         the datastrip.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MTD_L1C_DS_.*</drb:nameMatch>
+         <drb:parentClassTest>&s2;level1cDatastripContainer</drb:parentClassTest>
+      </drb:signature>
+      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Datastrip_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+</rdf:RDF>
