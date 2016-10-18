@@ -51,6 +51,7 @@
    <!-- User Product                 -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProduct">
       <rdfs:label xml:lang="en">Sentinel-2 User Product</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -115,7 +116,10 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;product"/>
       <drb:signature rdf:parseType="Resource">
+         <!-- NB signature before COMPACT support
          <drb:nameMatch>S2[AB]_...._PRD_MSI(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_.*\.SAFE</drb:nameMatch>
+         -->
+         <drb:nameMatch>S2[AB]_(...._PRD_MSI(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC|MSIL..)_.*\.SAFE</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -130,6 +134,7 @@
    <!-- ============================ -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_metadata"> -->
+   <!-- Compliant with COMPACT NO MODIFICATION REQUIRED? TBC -->
    <owl:Class rdf:about="&s2;userProductMetadataFile">
       <rdfs:label xml:lang="en">User Product: Main Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -147,6 +152,7 @@
    <!-- SAFE Manifest File           -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductSafeManifestFile">
       <rdfs:label xml:lang="en">User Product: SAFE Manifest File</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -166,6 +172,7 @@
    <!-- GRANULE Folder               -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductGranuleFolder">
       <rdfs:label xml:lang="en">User Product: GRANULE Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -201,6 +208,7 @@
    <!-- ============================ -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductDataStripFolder"> -->
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductDatastripFolder">
       <rdfs:label xml:lang="en">User Product: DATASTRIP Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -218,6 +226,7 @@
    <!-- Auxiliary Data Folder        -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductAuxiliaryDataFolder">
       <rdfs:label xml:lang="en">User Product: Auxiliary Data Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -246,7 +255,8 @@
    <!-- Preview Image File           -->
    <!-- ============================ -->
 
-   <!-- TODO TBC un PNG? -->
+   <!-- TODO TBC un PNG?
+        This declaration is not verified... -->
 
    <owl:Class rdf:about="&s2;userProductPreviewImageFile">
       <rdfs:label xml:lang="en">User Product: Preview Image File</rdfs:label>
@@ -269,6 +279,7 @@
    <!-- ============================ -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductRepInfoFolder"> -->
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductRepresentationInformationFolder">
       <rdfs:label xml:lang="en">User Product: Representation Information Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -287,6 +298,7 @@
    <!-- INSPIRE File                 -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductInspireFile">
       <rdfs:label xml:lang="en">User Product: INSPIRE File</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -303,6 +315,7 @@
    <!-- HTML Folder                  -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductHtmlFolder">
       <rdfs:label xml:lang="en">User Product: HTML Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -336,6 +349,7 @@
    <!-- User Product HTML File       -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductHtmlFile">
       <rdfs:label xml:lang="en">User Product: HTML File</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -353,6 +367,7 @@
    <!-- User Product XSL File        -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductXslFile">
       <rdfs:label xml:lang="en">User Product: XSL File</rdfs:label>
       <rdfs:comment xml:lang="en">

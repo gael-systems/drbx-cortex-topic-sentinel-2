@@ -54,6 +54,7 @@
    <!-- ============================ -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1C">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1C</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -118,7 +119,10 @@
       </rdfs:comment>
        <rdfs:subClassOf rdf:resource="&s2;userProduct"/>
       <drb:signature rdf:parseType="Resource">
+         <!-- NB signature before COMPACT support
          <drb:nameMatch>(S2A|S2B)_(OPER|TEST)_PRD_MSIL1C_([A-Z]{4})_(\d{4})([0-1])([0-9])[0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_R(\d{3})_V(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9].SAFE</drb:nameMatch>
+         -->
+         <drb:nameMatch>S2[AB]_(...._PRD_MSIL1C_([A-Z]{4})_(\d{4})([0-1])([0-9])[0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_R(\d{3})_V(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]|MSIL1C_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_N[0-9]{4}_R[0-9]{3}.*).SAFE</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -132,6 +136,7 @@
    <!-- Metadata File (Level-1C)     -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cMetadataFile">
       <rdfs:label xml:lang="en">User Product Level-1C: Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -139,18 +144,24 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
+         <!-- NB signature before COMPACT support
          <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L1C_PDMC.*</drb:nameMatch>
+         -->
+         <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)L1C_PDMC.*|MTD_MSIL1C.*)</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
       </drb:signature>
+      <!-- This xsd is in the product, but in the repository too? TBC
       <drb:schemaLocation>
           xsd/TODO.xsd
       </drb:schemaLocation>
+      -->
    </owl:Class>
 
    <!-- ============================ -->
    <!-- Metadata XSD (Level-1C)      -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cMetadataXsd">
       <rdfs:label xml:lang="en">User Product Level-1C: Metadata XML Schema</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -167,6 +178,7 @@
    <!-- Granule Folder (Level-1C)    -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cGranuleFolder">
       <rdfs:label xml:lang="en">User Product Level-1C: Granule Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -187,6 +199,7 @@
    <!-- Datastrip Folder (Level-1C)  -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cDatastripFolder">
       <rdfs:label xml:lang="en">User Product Level-1C: Datastrip Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -204,6 +217,7 @@
    <!-- Auxiliary Data Folder (Level-1C) -->
    <!-- ============================ -->
 
+   <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cAuxiliaryDataFolder">
       <rdfs:label xml:lang="en">User Product Level-1C: Auxiliary Data Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
