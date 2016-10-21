@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.gael.cortex</groupId>
-    <artifactId>drbx-cortex-topic-sentinel-2-user-commons</artifactId>
+    <artifactId>drbx-cortex-topic-sentinel-2-level-1c</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 

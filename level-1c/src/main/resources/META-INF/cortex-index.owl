@@ -6,7 +6,6 @@
    <!ENTITY owl "http://www.w3.org/2002/07/owl#">
    <!ENTITY s2   "http://www.esa.int/s2#">
    <!ENTITY drb "http://www.gael.fr/drb#">
-   <!ENTITY jpeg "http://www.gael.fr/drb/jpeg#">
    <!ENTITY jpeg2000 "http://www.gael.fr/drb/jpeg2000#">
 ]>
 
@@ -14,7 +13,6 @@
          xmlns:rdf="&rdf;"
          xmlns:rdfs="&rdfs;"
          xmlns:drb="&drb;"
-         xmlns:jpeg="&jpeg;"
          xmlns:jpeg2000="&jpeg2000;"
          xmlns:s2="&s2;"
          xml:base="&s2;">
@@ -40,14 +38,8 @@
 -->
 
    <owl:Ontology rdf:about="&s2;">
-      <rdfs:label xml:lang="en">Sentinel-2 User Products Level-1C Ontology</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-1C Ontology</rdfs:label>
    </owl:Ontology>
-
-   <!-- =================================================================== -->
-   <!--                                                                     -->
-   <!-- Products                                                            -->
-   <!--                                                                     -->
-   <!-- =================================================================== -->
 
    <!-- ============================ -->
    <!-- User Level-1C Product        -->
@@ -55,7 +47,7 @@
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;userProductLevel1C">
+   <owl:Class rdf:about="&s2;userProductLevel1c">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1C</rdfs:label>
       <rdfs:comment xml:lang="en">
          Level-1C is an orthoimage product, i.e. a map projection of the
@@ -119,18 +111,9 @@
       </rdfs:comment>
        <rdfs:subClassOf rdf:resource="&s2;userProduct"/>
       <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>(S2A|S2B)_(OPER|TEST)_PRD_MSIL1C_([A-Z]{4})_(\d{4})([0-1])([0-9])[0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_R(\d{3})_V(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9].SAFE</drb:nameMatch>
-         -->
-         <drb:nameMatch>S2[AB]_(...._PRD_MSIL1C_([A-Z]{4})_(\d{4})([0-1])([0-9])[0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_R(\d{3})_V(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]_(\d{4})[0-1][0-9][0-3][0-9](T)[0-2][0-9][0-6][0-9][0-6][0-9]|MSIL1C_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_N[0-9]{4}_R[0-9]{3}.*).SAFE</drb:nameMatch>
+         <drb:nameMatch>S2[AB]_(...._PRD_MSIL1C_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MSIL.._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_N...._R[0-9]{3}.*)\.SAFE</drb:nameMatch>
       </drb:signature>
    </owl:Class>
-
-   <!-- =================================================================== -->
-   <!--                                                                     -->
-   <!-- User Product Level-1C Structure (Floor 1)                           -->
-   <!--                                                                     -->
-   <!-- =================================================================== -->
 
    <!-- ============================ -->
    <!-- Metadata File (Level-1C)     -->
@@ -144,9 +127,6 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L1C_PDMC.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)L1C_PDMC.*|MTD_MSIL1C.*)</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
       </drb:signature>
@@ -165,103 +145,128 @@
    <owl:Class rdf:about="&s2;userProductLevel1cMetadataXsd">
       <rdfs:label xml:lang="en">User Product Level-1C: Metadata XML Schema</rdfs:label>
       <rdfs:comment xml:lang="en">
-         The XML schema describing the metadata file provided inside the S2 Level-1C User Product.
+         The XML schema describing the metadata file provided inside the S2
+         Level-1C User Product.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2_User_Product_Level-1C_Metadata.xsd</drb:nameMatch>
-         <drb:parentIsSubClassTest>&s2;userProductRepresentationInformationFolder</drb:parentIsSubClassTest>
+         <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Granule Folder (Level-1C)    -->
-   <!-- ============================ -->
+   <!-- =========================================== -->
+   <!-- Granule (Level-1C)                          -->
+   <!-- =========================================== -->
 
+   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_level_1c_tile_container"> -->
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;userProductLevel1cGranuleFolder">
-      <rdfs:label xml:lang="en">User Product Level-1C: Granule Folder</rdfs:label>
+   <owl:Class rdf:about="&s2;level1cGranule">
+      <rdfs:label xml:lang="en">Level-1C Granule</rdfs:label>
       <rdfs:comment xml:lang="en">
-         GRANULE folder contains the list of folders each one corresponding to
-         the granules composing the user product.
-         Level-1C User product: this folder (the name is chosen for homogeneity
-         with respect to the other user product) contains the tiles composing
-         the product (Image Data).
+         One of the granules composing the User Product Level-1C.
+         There are N granules-folders each one corresponding to the Tiles
+         composing the product.
+         The PDI Level-1C Tile consist of:
+         1. Level-1C_Tile_Metadata_File (Tile Metadata): XML Main Metadata
+             file (DIMAP mandatory file) containing the requested level of
+             information and referring all the product elements describing the
+             tile,
+         2. IMG_DATA: folder containing image data files compressed using the
+            JPEG2000 algorithm, one file per band.
+         3. QI_DATA: folder containing OLQC XML reports of quality checks, mask
+            files and PVI file;
       </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;userProductGranuleFolder"/>
+      <rdfs:subClassOf rdf:resource="&s2;granule"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>GRANULE</drb:nameTest>
-         <drb:parentClassTest>&s2;userProductLevel1C</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MSI_L1C_TL.*_N[0-9]{2}\.[0-9]{2}|L1C_T....._A[0-9]{6}_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
+         <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
       </drb:signature>
    </owl:Class>
 
    <!-- ============================ -->
-   <!-- Datastrip Folder (Level-1C)  -->
+   <!-- Tile Image File (Level-1C)   -->
    <!-- ============================ -->
 
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_image_file"> -->
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;userProductLevel1cDatastripFolder">
-      <rdfs:label xml:lang="en">User Product Level-1C: Datastrip Folder</rdfs:label>
+   <owl:Class rdf:about="&s2;level1cTileImageFile">
+      <rdfs:label xml:lang="en">Level-1C Tile Image File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         DATASTRIP folder contains the list of folders each one corresponding
-         to the Datastrips composing the user product.
+         One JPEG2000 file per band.
       </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;userProductDatastripFolder"/>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>DATASTRIP</drb:nameTest>
-         <drb:parentClassTest>&s2;userProductLevel1C</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MSI_L1C_.*|T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])_(B(01|02|03|04|05|06|07|08|09|10|11|12|8A)|TCI|PVI)\.(?i)jp2</drb:nameMatch>
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Auxiliary Data Folder (Level-1C) -->
-   <!-- ============================ -->
+   <!-- ================================= -->
+   <!-- Tile Metadata File (Level-1C)     -->
+   <!-- ================================= -->
 
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_tile_metadata"> -->
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;userProductLevel1cAuxiliaryDataFolder">
-      <rdfs:label xml:lang="en">User Product Level-1C: Auxiliary Data Folder</rdfs:label>
+   <owl:Class rdf:about="&s2;level1cGranuleMetadataFile">
+      <rdfs:label xml:lang="en">Level-1C Granule Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         AUX_DATA folder contains the auxiliary data files used for the 
-         processing.
-         Folder containing auxiliary data items needed for processing and 
-         provided with the product on request by the user. Some auxiliary data
-         (for instance IERS Bullettin and GIPPs files) can be provided either
-         with the product (if selected according to a specific download option)
-         or external to the product (referenced through the
-         Product_Metadata_File), others are only external to the product (for
-         instance the DEM used for the processing); in any case, all these
-         auxiliary data files are referenced in the XML Main metadata file.
-         In addition, the Level-1C embeds always an elementary set of
-         meteorological datasets extracted and resampled from ECMWF forecast
-         output.
+         The main XML metadata file provided inside each Level-1C tile.
       </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;userProductAuxiliaryDataFolder"/>
+      <rdfs:subClassOf rdf:resource="&s2;granuleMetadataFile"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>AUX_DATA</drb:nameTest>
-         <drb:parentIsSubClassTest>&s2;userProductLevel1C</drb:parentIsSubClassTest>
+         <drb:parentClassTest>&s2;level1cGranule</drb:parentClassTest>
+         <!-- NB signature before COMPACT support
+         <drb:nameMatch>S2[AB]_...._MTD_L1C_TL_.*</drb:nameMatch>
+         -->
+         <drb:nameMatch>(S2[AB]_...._MTD_L1C_TL_.*|MTD_TL\.xml)</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Tile_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ================================ -->
+   <!-- Datastrip (Level-1C)             -->
+   <!-- ================================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_container"> -->
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level1cDatastrip">
+      <rdfs:label xml:lang="en">Level-1C Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the datastrips for User Product Level-1C.
+         The PDI Level 1C DataStrip consist of:
+         1. DataStrip_Metadata_File: XML Main Metadata file (DIMAP mandatory
+            file) containing the requested level of information and referring all
+            the product elements describing the DataStrip.
+         2. QI_DATA: folder containing XML reports providing Quality control
+            checks information.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(S2[AB]_...._MSI_L1C_DS.*_N[0-9]{2}\.[0-9]{2}|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_S[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
+         <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Preview Image File (Level-1C) -->
-   <!-- ============================ -->
+   <!-- ================================ -->
+   <!-- Datastrip Metadata File (Level-1C) -->
+   <!-- ================================ -->
 
-   <!-- TODO TBC un PNG? -->
-
-   <owl:Class rdf:about="&s2;userProductLevel1cPreviewImageFile">
-      <rdfs:label xml:lang="en">User Product Level-1C: Preview Image File</rdfs:label>
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_metadata"> -->
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level1cDatastripMetadataFile">
+      <rdfs:label xml:lang="en">Level-1C Datastrip Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         File consisting of an image limited to 3 visible-bands in ground
-         geometry at 320m resolution. This file, provided if required by the
-         user, gives an overview of the product (sub-sampled) mainly for image
-         data browsing and selection purposes.
+         XML Main Metadata file (DIMAP mandatory file) containing the requested
+         level of information and referring all the product elements describing
+         the datastrip.
       </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;userProductPreviewImageFile"/>
+      <rdfs:subClassOf rdf:resource="&s2;datastripMetadataFile"/>
       <drb:signature rdf:parseType="Resource">
-         <!-- TBC l'extension devrait etre jp2 cf spec V06 p280) -->
-         <drb:nameMatch>S2[AB]_...._PVI_MSI(L1C|TCI)_\d{3}_\d{14}_\d{14}_\d{4}\.(?i)jp[g2x]</drb:nameMatch>
-         <drb:parentIsSubClassTest>&s2;userProductLevel1C</drb:parentIsSubClassTest>
+         <drb:nameMatch>(S2[AB]_...._MTD_L1C_DS_.*|MTD_DS.*)</drb:nameMatch>
+         <drb:parentClassTest>&s2;level1cDatastrip</drb:parentClassTest>
       </drb:signature>
+      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Datastrip_Metadata.xsd</drb:schemaLocation>
    </owl:Class>
 
 </rdf:RDF>
