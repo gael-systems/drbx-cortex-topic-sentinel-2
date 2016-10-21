@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 
-
 <!DOCTYPE rdf:RDF [
    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
    <!ENTITY owl "http://www.w3.org/2002/07/owl#">
    <!ENTITY s2   "http://www.esa.int/s2#">
    <!ENTITY drb "http://www.gael.fr/drb#">
-   <!ENTITY jpeg2000 "http://www.gael.fr/drb/jpeg2000#">
+   <!ENTITY jpeg "http://www.gael.fr/drb/jpeg#">
 ]>
+
+<rdf:RDF xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;"
+         xmlns:drb="&drb;"
+         xmlns:jpeg="&jpeg;"
+         xmlns:s2="&s2;"
+         xml:base="&s2;">
 
 <!--
 * Data Hub Service (DHuS) - For Space data distribution.
@@ -30,62 +37,500 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<rdf:RDF xmlns:owl="&owl;"
-         xmlns:rdf="&rdf;"
-         xmlns:rdfs="&rdfs;"
-         xmlns:drb="&drb;"
-         xmlns:jpeg2000="&jpeg2000;"
-         xmlns:s2="&s2;"
-         xml:base="&s2;">
-
    <owl:Ontology rdf:about="&s2;">
       <rdfs:label xml:lang="en">Sentinel-2 Commons Ontology</rdfs:label>
    </owl:Ontology>
 
-   <!-- =================================================================== -->
-   <!--                                                                     -->
-   <!-- Products                                                            -->
-   <!--                                                                     -->
-   <!-- =================================================================== -->
-
    <!-- ============================ -->
-   <!-- Product                      -->
+   <!-- Sentibel-2 Item              -->
    <!-- ============================ -->
 
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;product">
-      <rdfs:label xml:lang="en">Sentinel-2 Product</rdfs:label>
+   <!-- This class is created mostly to give a parent to items that can be
+        placed either inside a User product, or a PDI (e.g. manifest file,
+        rep-info folder...)
+        As it follows-->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;item">
+      <rdfs:label xml:lang="en">Sentinel-2 Item (user product or PDI)</rdfs:label>
       <rdfs:comment xml:lang="en">
-         Sentinel-2 product
+         Sentinel-2 Item: either a User product, or a PDI, or any item
+         following the pattern PDI_ID.*.
       </rdfs:comment>
      <rdfs:subClassOf rdf:resource="&drb;item"/>
-     <rdfs:subClassOf rdf:resource="&drb;safe-product"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_.*</drb:nameMatch>
+         <!--<drb:nameMatch>S2[AB]_(...._(PRD|MSI)|MSIL..).*</drb:nameMatch>-->
+         <drb:nameMatch>(S2[AB]_...._(PRD|MSI).*|S2[AB]_MSIL...*|L.._T....._A[0-9]{6}.*|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9].*)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
-   <!-- =========================================== -->
-   <!-- Under GRANULE Folder                        -->
-   <!-- =========================================== -->
+   <!-- ==================================================================== -->
+   <!-- User                                                                 -->
+   <!-- ==================================================================== -->
 
    <!-- ============================ -->
-   <!-- Granule Container            -->
+   <!-- User Product                 -->
    <!-- ============================ -->
 
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;granuleContainer">
-      <rdfs:label xml:lang="en">Granule Container</rdfs:label>
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;userProduct">
+      <rdfs:label xml:lang="en">Sentinel-2 User Product</rdfs:label>
       <rdfs:comment xml:lang="en">
-         One of the granules composing the User Product. 
+         User Product is the product delivered to the End User corresponding to:
+         * A user-defined geographical product subset along the spacecraft orbit;
+         * A user-defined selection of product independent components specified
+         as download options (e.g. image data, browse image, preview image,
+         spectral bands, auxiliary data, ancillary data,
+         brief/standard/expertise metadata etc..) according to different user
+         authorizations.
+         From the End User point of view, PDIs and PDI organization are aspects
+         completely transparent. The end user selects from the catalogue a
+         defined geographical area or subscribes a request and the final
+         product is available on its hard disk.
+         The selection from the catalogue follows two different ways:
+         * interactively: the user select from graphical interface a
+         user-defined geographical area in a given time range, the catalogue
+         shows the datatakes intersecting in time and space the submitted
+         query. Given a datatake the user can decide to download the whole
+         datatake or a portion i.e. a sub-set contiguous of the granules
+         contained in the datatake.
+         * By subscription: the user select a user-defined geographical area
+         and a frequency time, the catalogue systematically will provide to the
+         user the whole datatake or a set of the granules every time that a
+         data corresponding to the subscribed query will be available.
+         Regardless of used approach, the system will receive from the
+         catalogue the list of the PDI_ID of the granules corresponding to the
+         user selection coinciding with the ID of the archived PDI. Through the
+         use of this list the corresponding PDI (granule and Datastrip) are
+         restored to assemble the final product.
+         From the system (PDGS) point of view, User Product is composed by a
+         set of granules. All granules intersecting/touching the region of
+         interest of the user are provided into the final products The system,
+         based on the download options, downloads in a specific repository for
+         example a set of the bands, a set of the metadata according to user
+         category (brief/standard/expertise) or all product components.
+         Once we have collected the required product components, the User
+         Product is pakaged in a configured repository in SAFE or DIMAP format
+         according to a specified download-option.
+         Taking into account the strategy used to archived the PDIs (see
+         [CCTS-US]) the granules selected to assembly the User Product will be
+         contiguous in terms of the sensing time, acquired with the same
+         operation mode and in the same imaging orbit, corresponding to the
+         same processing level. In other words, User Product refers always to a
+         given Datatake (continuous MSI imaging segment). In the particular
+         case of an instrument mode changes during an imaging orbit, distinct
+         products will be made available, one per Datatake.
+         User Product containing the entire Datatake is defined as
+         Datatake-Product; it is a particular case of a User Product
+         exhaustively embedding all granules and all product components (e.g.
+         spectral bands, metadata, etc) along the Datatake.
+         Therefore, a User Product may be composed by:
+         * all granules sharing the same Datatake_ID (Datatake-Product)
+         * all granules sharing the same Datatake_ID within a given selection.
+         In terms of Datastrip, a User Product may however include several
+         Datastrips corresponding to distinct and complementary acquisitions
+         on-ground of a same Datatake acquired on-board.
+         For the particular case of the Level-0 products for which bands are
+         not co-registered, the selected granules will be those where the
+         user-defined area intersects the granule envelope (i.e. the union of
+         the footprints of all bands).
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;safe-product"/>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <!-- NB signature before COMPACT support
+         <drb:nameMatch>S2[AB]_...._PRD_MSI(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_.*\.SAFE</drb:nameMatch>
+         -->
+         <drb:nameMatch>S2[AB]_(...._PRD_MSI(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MSIL.._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_N...._R[0-9]{3}.*)\.SAFE</drb:nameMatch>
+         </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- GRANULE Wrapper              -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- WARN NAME CHANGED -->
+   <owl:Class rdf:about="&s2;granuleWrapper">
+      <rdfs:label xml:lang="en">User Product: GRANULE Wrapper</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         GRANULE folder contains the list of folders each one corresponding to
+         the granules composing the user product.
+         Level-0 User product: folder containing all granules composing the
+         product (Image Data). The Image data are a set of annotated instrument
+         source packets (ISP) corresponding to the compressed imaging data
+         grouped in .'granules'. In the case of an extract, the image data
+         (granules) are provided to cover the selected extract.
+         The image data inside each Level-0 granule, are provided as a set of
+         13 binary files, one for each spectral band, including all
+         corresponding annotated Image Source Packets (ISP) in the observation
+         chronological sequence.
+         Level-1A and Level-1B User product: folder containing all granules
+         composing the product (Image Data). The Image data are provided by a
+         set of raster files. The image data extent correspond to a set of
+         .'granules.' and can covers up to 12 detectors * 13 bands of the orbit
+         in full resolution. A sub-set of the 13 bands can be provided.
+         Level-1C User product: this folder (the name is chosen for homogeneity
+         with respect to the other user product) contains the tiles composing
+         the product (Image Data).
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>GRANULE</drb:nameTest>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- DATASTRIP Wrapper            -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductDataStripFolder"> -->
+   <!-- WARN NAME CHANGED -->
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;datastripWrapper">
+      <rdfs:label xml:lang="en">User Product: DATASTRIP Wrapper</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         DATASTRIP folder contains the list of folders each one corresponding
+         to the Datastrips composing the user product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>DATASTRIP</drb:nameTest>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Auxiliary Data Folder        -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- WARN NAME CHANGED -->
+   <!-- TODO rdfs:comment a revoir car AUX_DATA est user-product et pdi L1C a la fois -->
+   <owl:Class rdf:about="&s2;auxiliaryDataFolder">
+      <rdfs:label xml:lang="en">Auxiliary Data Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         AUX_DATA folder contains the auxiliary data files used for the
+         processing.
+         Folder containing auxiliary data items needed for processing and
+         provided with the product on request by the user. Some auxiliary data
+         (for instance IERS Bullettin and GIPPs files) can be provided either
+         with the product (if selected according to a specific download option)
+         or external to the product (referenced through the
+         Product_Metadata_File), others are only external to the product (for
+         instance the DEM used for the processing); in any case, all these
+         auxiliary data files are referenced in the XML Main metadata file.
+         In addition, the Level-1C embeds always an elementary set of
+         meteorological datasets extracted and resampled from ECMWF forecast
+         output.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>AUX_DATA</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- HTML Folder                  -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;userProductHtmlFolder">
+      <rdfs:label xml:lang="en">User Product: HTML Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         HTML Folder.
+         This folder contains two files:
+         1. UserProduct_index.html
+         2. UserProduct_index.xsl
+         The first file is a product presentation file allowing the End User to display easily the main conte
+         nt of the product.
+         The second one represents the stylesheet used to generate the first one allowing the End User to dis
+         play a selected sub-set of the product metadata.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>HTML</drb:nameTest>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- User Product HTML File       -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;userProductHtmlFile">
+      <rdfs:label xml:lang="en">User Product: HTML File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         This file is a product presentation file allowing the End User to
+         display easily the main content of the product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>UserProduct_index.html</drb:nameTest>
+         <drb:parentClassTest>&s2;HTML</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- User Product XSL File        -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;userProductXslFile">
+      <rdfs:label xml:lang="en">User Product: XSL File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         This file represents the stylesheet used to generate the first one
+         allowing the End User to display a selected sub-set of the product
+         metadata.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>UserProduct_index.xsl</drb:nameTest>
+         <drb:parentClassTest>&s2;HTML</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- INSPIRE File                 -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;userProductInspireFile">
+      <rdfs:label xml:lang="en">User Product: INSPIRE File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML INSPIRE metadata file.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>INSPIRE\..*</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Product Metadata File        -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_metadata"> -->
+   <!-- Compliant with COMPACT NO MODIFICATION REQUIRED? TBC -->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;userProductMetadataFile">
+      <rdfs:label xml:lang="en">User Product: Main Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Mandatory XML main metadata file (DIMAP) containing the requested
+         level of information and referring all the product elements.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <!--
+         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L(0P|1A|1B|1C)_PDMC.*</drb:nameMatch>
+         -->
+         <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MTD_MSIL..)\.xml</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- SAFE Manifest File           -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- WARN NAME CHANGED -->
+   <owl:Class rdf:about="&s2;sentinel2SafeManifestFile">
+      <rdfs:label xml:lang="en">Sentinel-2 SAFE Manifest File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML file with fixed name manifest.safe.
+         User product: The Sentinel-2 SAFE metadata file is optional. It is
+         included in the product only if the user requests a SAFE product as
+         output format (according to a specific download option).
+         PDI: The Sentinel-2 SAFE metadata file is available inside a
+         Granule/Tile or Datastrip PDI, but is removed from the PDI when the
+         PDI is included in a User product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;safe-manifest"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>manifest.safe</drb:nameTest>
+         <drb:parentIsSubClassTest>&s2;item</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Representation Information Folder -->
+   <!-- ============================ -->
+
+   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductRepInfoFolder"> -->
+   <!-- Compliant with COMPACT -->
+   <!-- WARN NAME CHANGED -->
+   <owl:Class rdf:about="&s2;representationInformationFolder">
+      <rdfs:label xml:lang="en">Representation Information Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Folder containing XSD schema(s).
+         User product: This folder is optional. It will be included in the
+         final product if the user select the SAFE format as output format.
+         PDI: This folder is available inside a Granule/Tile or Datastrip PDI,
+         but is removed from the PDI when the PDI is includedin a User product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameTest>rep_info</drb:nameTest>
+         <drb:parentIsSubClassTest>&s2;item</drb:parentIsSubClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ==================================================================== -->
+   <!-- PDI                                                                  -->
+   <!-- ==================================================================== -->
+
+   <!-- ============================ -->
+   <!-- Granule                      -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- WARN NAME CHANGED -->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;granule">
+      <rdfs:label xml:lang="en">Granule</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         A granule.
+         MSI products are provided as a compilation along a single orbit of
+         elementary Granules of fixed size. In this respect, the product
+         granularity corresponds to the minimum indivisible partition of one
+         Sentinel-2 User Product.
+         For Level-0, 1A and 1B products, these Granules are sub-images in MSI
+         sensor reference frame of a given number of lines along-track and
+         detector separated.
+         Granules are defined further for each product level type.
+         All Granules intersecting/touching the Region of Interest of the user
+         are provided into the final User Product.
+         Granule/Tile PDI is organized as following:
+         1. Granule_Metadata_File: XML metadata file describing all the elements
+            contained inthe Granule PDI;
+         2. IMG_DATA: folder containing the image data foreseen for each kind of
+            Granule / Tile PDI;
+         3. QI_DATA: folder containing the XML reports including the quality
+            control checks performed by OLQC processor (for each L0/L1A/L1B/L1C
+            PDI) and the GML quality masks (for each L1A/L1B/L1C PDI). In
+            addition, in case of L1C Tile, this folder contains the PVI file.
+         4. AUX_DATA: folder containing ECMWF dataset resampled in UTM projection.
+            Note that this folder is provided only inside a Level-1C Tile PDI.
+         5. Inventory_Metadata.xml: inventory metadata file.
+         6. manifest.safe: XML SAFE Manifest file.
+         7. rep_info: folder containing the available XSD schemas used
+            to validate the Granule PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Granule/Tile PDI but they are removed when the PDI
+         is included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
          <!-- NB signature before COMPACT support
          <drb:nameMatch>S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
          -->
-         <drb:nameMatch>(S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}|L.._T....._A[0-9]{6}_...............)</drb:nameMatch>
-         <drb:parentClassTest>&s2;granuleFolder</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}|L.._T....._A[0-9]{6}_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
+         <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================= -->
+   <!-- Granule Metadata File             -->
+   <!-- ================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;granuleMetadataFile">
+      <rdfs:label xml:lang="en">Granule Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The main XML metadata file provided inside each granule.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;granule</drb:parentClassTest>
+         <!-- NB signature before COMPACT support
+         <drb:nameMatch>S2[AB]_...._MTD_L1C_TL_.*</drb:nameMatch>
+         -->
+         <drb:nameMatch>(S2[AB]_...._MTD_L(0__GR|1A_GR|1B_GR|1C_TL)_.*|MTD_TL\.xml)</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ============================ -->
+   <!-- Datastrip                    -->
+   <!-- ============================ -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- WARN NAME CHANGED -->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;datastrip">
+      <rdfs:label xml:lang="en">Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Within a given Datatake, a portion of sensed image downlinked during
+         a pass to a given station is termed Datastrip. If a particular orbit
+         is acquired by more than one station, a Datatake is composed of one
+         or more Datastrips.
+         A Datastrip refers thus to all data corresponding to:
+         1. a single Datatake;
+         2. downlinked over a given ground station.
+         In terms of Datatake and Datastrips a Sentinel-2 User Product may
+         therefore include one or more Datastrips belonging to the same
+         Datatake.
+         The minimum length of a Datastrip is 92 km corresponding to four
+         on-board scenes.
+         The maximum length of a Datastrip is theoretically the maximum length
+         of a Datatake i.e. 15000 km (continuous observation from Northern
+         Russia to Southern Africa).
+         The Datastrip identifier is a character string that identifies in a
+         unique way a Sentinel-2 acquired Datastrip relatively to a given
+         Datatake.
+         Datastrip PDI is organized as following:
+         1. Datastrip_Metadata_File: XML Metadata file describing all the
+            elements contained in the Datastrip PDI;
+         2. QI_DATA: folder containing the XML reports including the quality
+            control checks performed by OLQC processor. In addition, in case of
+            L0 Datastrip this folder contains the preliminary QuickLook files
+            (five image files in JPEG2000 format),
+         3. ANC_DATA: folder containing SAD raw data as received from the DFEP.
+            Note that this folder is provided only inside a Level-0 Datastrip
+            PDI;
+         4. Inventory_Metadata.xml: inventory metadata file;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that describe
+            each Datastrip PDI components.
+         Note that the ANC_DATA, Inventory_Metadata.xml, manifest.safe and
+         rep_info are available inside a Datastrip PDI but they are removed
+         when the PDI is included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
+         <!-- NB signature before COMPACT support
+         <drb:nameMatch>S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         -->
+         <drb:nameMatch>(S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_S[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================ -->
+   <!-- Datastrip Metadata File          -->
+   <!-- ================================ -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;datastripMetadataFile">
+      <rdfs:label xml:lang="en">Datastrip Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML Main Metadata file (DIMAP mandatory file) containing the requested
+         level of information and referring all the product elements describing
+         the datastrip.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <!-- NB signature before COMPACT support
+         <drb:nameMatch>S2[AB]_...._MTD_L1C_DS_.*</drb:nameMatch>
+         -->
+         <drb:nameMatch>(S2[AB]_...._MTD_L(0_|1A|1B|1C)_DS_.*|MTD_DS\.xml)</drb:nameMatch>
+         <drb:parentClassTest>&s2;datastrip</drb:parentClassTest>
       </drb:signature>
    </owl:Class>
 
@@ -104,37 +549,9 @@
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameTest>IMG_DATA</drb:nameTest>
-         <drb:parentClassTest>&s2;granuleContainer</drb:parentClassTest>
+         <drb:parentClassTest>&s2;granule</drb:parentClassTest>
       </drb:signature>
    </owl:Class>
-
-   <!-- =========================================== -->
-   <!-- Under DATASTRIP Folder                      -->
-   <!-- =========================================== -->
-
-   <!-- ============================ -->
-   <!-- Datastrip Container          -->
-   <!-- ============================ -->
-
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;datastripContainer">
-      <rdfs:label xml:lang="en">Datastrip Container</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         One of the datastrips composing the User Product. 
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&drb;item"/>
-      <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;userProductDatastripFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
-         -->
-         <drb:nameMatch>(S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_S[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
-      </drb:signature>
-   </owl:Class>
-
-   <!-- =========================================== -->
-   <!-- Under GRANULE or DATASTRIP Folder           -->
-   <!-- =========================================== -->
 
    <!-- ============================ -->
    <!-- Quality Control Folder       -->
@@ -153,7 +570,7 @@
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameTest>QI_DATA</drb:nameTest>
-         <drb:parentClassTest>&s2;granuleContainer</drb:parentClassTest>
+         <drb:parenIsSubClassTest>&s2;item</drb:parenIsSubClassTest>
       </drb:signature>
    </owl:Class>
 
@@ -168,12 +585,10 @@
       <rdfs:comment xml:lang="en">
          Quality control report file contains detected errors in this product.
       </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._.*_(?i)report\.xml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._.*_(?i)report|SENSOR_QUALITY|GEOMETRIC_QUALITY|GENERAL_QUALITY|RADIOMETRIC_QUALITY|FORMAT_CORRECTNESS)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
@@ -188,16 +603,13 @@
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileGeneralQuality">
-      <rdfs:label xml:lang="en">Quality Control File: General Quality</rdfs:label>
+      <rdfs:label xml:lang="en">General Quality Control File</rdfs:label>
       <rdfs:comment xml:lang="en">
          General Quality Control File.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._.*_GENERAL_QUALITY_(?i)report\.xml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._.*_GENERAL_QUALITY_(?i)report|GENERAL_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
@@ -212,16 +624,13 @@
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileGeometricQuality">
-      <rdfs:label xml:lang="en">Quality Control File: Geometric Quality</rdfs:label>
+      <rdfs:label xml:lang="en">Geometric Quality Control File</rdfs:label>
       <rdfs:comment xml:lang="en">
          Geometric Quality Control File.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._.*_GEOMETRIC_QUALITY_(?i)report\.xml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._.*_GEOMETRIC_QUALITY_(?i)report|GEOMETRIC_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
@@ -236,16 +645,13 @@
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileRadiometricQuality">
-      <rdfs:label xml:lang="en">Quality Control File: Radiometric Quality</rdfs:label>
+      <rdfs:label xml:lang="en">Radiometric Quality Control File</rdfs:label>
       <rdfs:comment xml:lang="en">
          Radiometric Quality Control File.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._.*_RADIOMETRIC_QUALITY_(?i)report\.xml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._.*_RADIOMETRIC_QUALITY_(?i)report|RADIOMETRIC_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
@@ -260,16 +666,13 @@
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileSensorQuality">
-      <rdfs:label xml:lang="en">Quality Control File: Sensor Quality</rdfs:label>
+      <rdfs:label xml:lang="en">Sensor Quality Control File</rdfs:label>
       <rdfs:comment xml:lang="en">
          Sensor Quality Control File.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._.*_SENSOR_QUALITY_(?i)report\.xml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._.*_SENSOR_QUALITY_(?i)report|SENSOR_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
@@ -284,16 +687,13 @@
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileFormatCorrectnessQuality">
-      <rdfs:label xml:lang="en">Quality Control File: Format Correctness Quality</rdfs:label>
+      <rdfs:label xml:lang="en">Format Correctness Quality Control File</rdfs:label>
       <rdfs:comment xml:lang="en">
          Format Correctness Quality Control File.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;qualityControlFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._.*_FORMAT_CORRECTNESS_(?i)report\.xml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._.*_FORMAT_CORRECTNESS_(?i)report|FORMAT_CORRECTNESS)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
@@ -315,9 +715,6 @@
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_.*\.gml</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_.*|MSK_......_B..)\.gml</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -333,16 +730,13 @@
       <rdfs:comment xml:lang="en">
          These vector files (derived from cloud detection using the preliminary
          quicklook images), contain a list of polygons in sensor mask  geometry
-         (Level-1A reference frame) indicating the presence of clouds on the 
+         (Level-1A reference frame) indicating the presence of clouds on the
          images.
          Present in Level 1A and 1B products.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_CLOLOW.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_CLOLOW|MSK_CLOLOW_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -363,9 +757,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_CLOUDS.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_CLOUDS|MSK_CLOUDS_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -386,9 +777,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_TECQUA.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_TECQUA|MSK_TECQUA_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -409,9 +797,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_LANWAT.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_LANWAT|MSK_LANWAT_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -431,9 +816,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_DETFOO.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_DETFOO|MSK_DETFOO_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -453,9 +835,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_DEFECT.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_DEFECT|MSK_DEFECT_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -475,9 +854,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_SATURA.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_SATURA|MSK_SATURA_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -498,9 +874,6 @@
       <rdfs:subClassOf rdf:resource="&s2;maskFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSK_NODATA.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSK_NODATA|MSK_NODATA_B..).*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -521,184 +894,6 @@
          <drb:parentIsSubClassTest>&s2;qualityControlFolder</drb:parentIsSubClassTest>
          <drb:nameMatch>S2[AB]_...._MSK_DEMQUA.*</drb:nameMatch>
       </drb:signature>
-   </owl:Class>
-
-   <!-- =================================================================== -->
-   <!--                                                                     -->
-   <!-- Level-1C                                                            -->
-   <!--                                                                     -->
-   <!-- =================================================================== -->
-
-   <!-- =========================================== -->
-   <!-- Under GRANULE Folder (Level-1C)             -->
-   <!-- =========================================== -->
-
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_level_1c_tile_container"> -->
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;level1cGranuleContainer">
-      <rdfs:label xml:lang="en">Level-1C: Granule Container</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         One of the granules composing the User Product Level-1C.
-         There are N granules-folders each one corresponding to the Tiles
-         composing the product.
-         The PDI Level-1C Tile consist of: 
-         1. Level-1C_Tile_Metadata_File (Tile Metadata): XML Main Metadata 
-             file (DIMAP mandatory file) containing the requested level of  
-             information and referring all the product elements describing the 
-             tile,
-         2. IMG_DATA: folder containing image data files compressed using the 
-            JPEG2000 algorithm, one file per band.
-         3. QI_DATA: folder containing OLQC XML reports of quality checks, mask
-            files and PVI file;
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;granuleContainer"/>
-      <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSI_L1C_TL.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
-         -->
-         <drb:nameMatch>(S2[AB]_...._MSI_L1C_TL.*_N[0-9]{2}\.[0-9]{2}|L1C_T....._A[0-9]{6}_...............)</drb:nameMatch>
-         <drb:parentClassTest>&s2;userProductLevel1cGranuleFolder</drb:parentClassTest>
-      </drb:signature>
-   </owl:Class>
-
-   <!-- ============================ -->
-   <!-- Image Data Folder (Level-1C) -->
-   <!-- ============================ -->
-
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_image_folder"> -->
-   <!-- Compliant with COMPACT NO MODIFICATION REQUIRED -->
-   <owl:Class rdf:about="&s2;level1cImageFolder">
-      <rdfs:label xml:lang="en">Level-1C: Image Folder</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         During the Level-1C User Product generation, according to the Spectral
-         Bands download options, the IMG_DATA folder can contain a set of bands
-         and/or the TCI corresponding to the Tile. The TCI can be requested
-         into the User Product even if no other spectral band data has been
-         selected.
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;imageFolder"/>
-      <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>IMG_DATA</drb:nameTest>
-         <drb:parentClassTest>&s2;level1cGranuleContainer</drb:parentClassTest>
-      </drb:signature>
-   </owl:Class>
-
-   <!-- ============================ -->
-   <!-- Tile Image File (Level-1C)   -->
-   <!-- ============================ -->
-
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_image_file"> -->
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;level1ciTileImageFile">
-      <rdfs:label xml:lang="en">Level-1C: Tile Image File</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         One JPEG2000 file per band.
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
-      <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSI_L1C_.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)jp2</drb:nameMatch>
-         -->
-         <drb:nameMatch>(S2[AB]_...._MSI_L1C_.*|T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])_(B(01|02|03|04|05|06|07|08|09|10|11|12|8A)|TCI|PVI)\.(?i)jp2</drb:nameMatch>
-         <drb:parentClassTest>&s2;level1cImageFolder</drb:parentClassTest>
-      </drb:signature>
-   </owl:Class>
-
-   <!-- ============================ -->
-   <!-- Quality Control Folder (Level-1C) -->
-   <!-- ============================ -->
-
-   <!-- Compliant with COMPACT NO MODIFICATION REQUIRED -->
-   <owl:Class rdf:about="&s2;level1cQualityControlFolder">
-      <rdfs:label xml:lang="en">Level-1C: Quality Control Folder</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         Folder containing the XML reports including the quality control checks
-         performed by OLQC processor (for each L0/L1A/L1B/L1C PDI) and the GML
-         quality masks (for each L1A/L1B/L1C PDI). In addition, in case of L1C
-         Tile, this folder contains the PVI file.
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;qualityControlFolder"/>
-      <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>QI_DATA</drb:nameTest>
-         <drb:parentClassTest>&s2;level1cGranuleContainer</drb:parentClassTest>
-      </drb:signature>
-   </owl:Class>
-
-   <!-- ================================= -->
-   <!-- Tile Metadata Files (Level-1C)    -->
-   <!-- ================================= -->
-
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_tile_metadata"> -->
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;level1cGranuleMetadataFile">
-      <rdfs:label xml:lang="en">Level-1C: Granule Metadata File</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         The main XML metadata file provided inside each Level-1C tile.
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&drb;xml"/>
-      <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;level1cGranuleContainer</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MTD_L1C_TL_.*</drb:nameMatch>
-         -->
-         <drb:nameMatch>(S2[AB]_...._MTD_L1C_TL_.*|MTD_TL\.xml)</drb:nameMatch>
-      </drb:signature>
-      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Tile_Metadata.xsd</drb:schemaLocation>
-   </owl:Class>
-
-   <!-- =========================================== -->
-   <!-- Under DATASTRIP Folder (Level-1C)           -->
-   <!-- =========================================== -->
-
-   <!-- ================================ -->
-   <!-- Datastrip Container (Level-1C)   -->
-   <!-- ================================ -->
-
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_container"> -->
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;level1cDatastripContainer">
-      <rdfs:label xml:lang="en">Level-1C: Datastrip Container</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         One of the datastrips for User Product Level-1C.
-         The PDI Level 1C DataStrip consist of:
-         1. DataStrip_Metadata_File: XML Main Metadata file (DIMAP mandatory
-            file) containing the requested level of information and referring all
-            the product elements describing the DataStrip.
-         2. QI_DATA: folder containing XML reports providing Quality control
-            checks information.
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&s2;datastripContainer"/>
-      <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSI_L1C_DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
-         -->
-         <drb:nameMatch>(S2[AB]_...._MSI_L1C_DS.*_N[0-9]{2}\.[0-9]{2}|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_S[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
-         <drb:parentClassTest>&s2;userProductLevel1cDatastripFolder</drb:parentClassTest>
-      </drb:signature>
-   </owl:Class>
-
-   <!-- ================================ -->
-   <!-- Datastrip Metadata File (Level-1C) -->
-   <!-- ================================ -->
-
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_metadata"> -->
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;level1cDatastripMetadataFile">
-      <rdfs:label xml:lang="en">Level-1C: Datastrip Metadata File</rdfs:label>
-      <rdfs:comment xml:lang="en">
-         XML Main Metadata file (DIMAP mandatory file) containing the requested
-         level of information and referring all the product elements describing
-         the datastrip.
-      </rdfs:comment>
-      <rdfs:subClassOf rdf:resource="&drb;xml"/>
-      <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MTD_L1C_DS_.*</drb:nameMatch>
-         -->
-         <drb:nameMatch>(S2[AB]_...._MTD_L1C_DS_.*|MTD_DS.*)</drb:nameMatch>
-         <drb:parentClassTest>&s2;level1cDatastripContainer</drb:parentClassTest>
-      </drb:signature>
-      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Datastrip_Metadata.xsd</drb:schemaLocation>
    </owl:Class>
 
 </rdf:RDF>
