@@ -19,20 +19,11 @@
 
    <modules>
       <module>commons</module>
-      <module>user-commons</module>
-      <module>user-level-1c</module>
+      <module>level-1c</module>
       <!--
-      <module>user-level-0</module>
-      <module>user-level-1a</module>
-      <module>user-level-1b</module>
-      <module>user-level-1c</module>
-      <module>user-level-2a</module>
-      <module>pdi-commons</module>
-      <module>pdi-level-0</module>
-      <module>pdi-level-1a</module>
-      <module>pdi-level-1b</module>
-      <module>pdi-level-1c</module>
-      <module>pdi-level-2a</module>
+      <module>level-0</module>
+      <module>level-1a</module>
+      <module>level-1b</module>
       -->
    </modules>
 
