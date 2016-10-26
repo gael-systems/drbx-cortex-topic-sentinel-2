@@ -15,4 +15,12 @@
       <version>1-0-rc-5</version>
       <relativePath></relativePath>
    </parent>
+
+   <dependencies>
+      <dependency>
+         <groupId>fr.gael.cortex</groupId>
+         <artifactId>drbx-cortex-topic-sentinel-2-commons</artifactId>
+         <version>1.0.0</version>
+      </dependency>
+   </dependencies>
 </project>
