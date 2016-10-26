@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<!DOCTYPE rdf:RDF [
+   <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+   <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+   <!ENTITY s2   "http://www.esa.int/s2#">
+   <!ENTITY drb "http://www.gael.fr/drb#">
+   <!ENTITY jpeg2000 "http://www.gael.fr/drb/jpeg2000#">
+]>
+
+<rdf:RDF xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;"
+         xmlns:drb="&drb;"
+         xmlns:jpeg2000="&jpeg2000;"
+         xmlns:s2="&s2;"
+         xml:base="&s2;">
+
+<!--
+* Data Hub Service (DHuS) - For Space data distribution.
+* Copyright (C) 2013,2014,2015,2016 GAEL Systems
+*
+* This file is part of DHuS software sources.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+   <owl:Ontology rdf:about="&s2;">
+      <rdfs:label xml:lang="en">Sentinel-2 Level-1B Ontology</rdfs:label>
+   </owl:Ontology>
+
+   <!-- ========================================= -->
+   <!-- User Level-1B Product                     -->
+   <!-- ========================================= -->
+
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;userLevel1BProduct"> -->
+   <owl:Class rdf:about="&s2;userProductLevel1b">
+      <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1B</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The Level-1B product is a Radio-corrected and geo-refined product
+         obtained by performing radiometric corrections on the Level-1A data
+         and refining its geometric model.
+         The following list introduces the input data of Level-1B processing:
+         * Input of Level-1B processing - Metadata: Metadata from Level-1A
+         product.
+         * Input of Level-1B processing - Image Data: Uncompressed image data
+         (from Level-1A, in the data flow).
+         * Input of Level-1B processing - Auxiliary Data: GIPP: Parameters from
+         Level-1A complemented by radiometric and geometric processing
+         parameters. GRI (Global Reference Images): only the reference to the
+         data used is provided. DEM: only the reference to the data used is
+         provided.
+         * Input of Level-1B processing - Quality Indicator Data: Quality
+         indicator files from Level-1B.
+         The Level-1B corrections include:
+         * Radiometric corrections:
+            - dark signal
+            - pixel response non uniformity
+            - crosstalk correction
+            - defective pixels
+            - High spatial resolution bands restoration: deconvolution and
+            denoising based on a wavelet processing (if necessary according to
+            certain noise criteria).
+            - Binning for 60m bands (spatial filtering)
+         * Physical geometric model refinement using GCPs provided by the GRI;
+         this model is not applied to the image but appended to the metadata
+         * Pixel classification: singular pixels detections (defectives pixels,
+         saturations, nodata).
+         No resampling is performed up to Level-1B.
+         The geometric model refinement of the Level-1B is optional. A
+         dedicated flag in the metadata notifies whether the geometric model
+         provided is the raw model or the refined model.
+         Note that one Level-1B product:
+         * refers always to one Datatake;
+         * refer to one or several DataStrip from the same Datatake;
+         * may cover the full Datatake or an extract of the Datatake.
+         In the case of an extract, the image data are provided to cover the
+         selected extract only. In any case (full or extract of Datatake), the
+         ancillary data, referenced through the product metadata file, are
+         always provided on the temporal extent of the full Datatake.
+         The Level-1B User product consists of:
+         1. Product_Metadata_File: This is the mandatory XML main metadata file
+         (DIMAP) containing the requested level of information and referring
+         all the product elements.
+         2. manifest.safe: this is the SAFE metadata file (optional). It is
+         included in the product only if the user requests the product to be
+         SAFE formatted (according to a specific download option).
+         3. GRANULE: folder containing all granules composing the product
+         (Image Data). The Image data are provided by a set of raster files.
+         The image data extent correspond to a set of .'granules.' and can
+         covers up to 12 detectors * 13 bands of the orbit in full resolution.
+         A sub-set of the 13 bands can be provided.
+         4. DATASTRIP: folder containing the DataStrip composing the product
+         linked to the selected granules.
+         5. AUX_DATA: folder containing the auxiliary data items needed for the
+         Level-1B processing and provided with the product on request by the
+         user. Some auxiliary data items (for instance IERS Bullettin and GIPPs
+         files) can be provided either with the product (if selected by the
+         user according to a specific download option) or external to the
+         product (referenced through the Product_Metadata_File), others are
+         only external to the product (DEM and GRI); in any case, all the
+         auxiliary data files are referenced in the XML Main metadata file.
+         6. Preview_Image: file consisting of an image limited to 3
+         visible-bands in ground geometry at 320m resolution. This file,
+         provided if requested by the user, gives an overview of the product
+         (sub-sampled) mainly for image data browsing and selection purposes.
+         7. rep_info: folder containing the XSD schema provided inside the
+         product. This folder is optional. It will be included in the final
+         product if the user select the SAFE format as output format.
+         8. INSPIRE: XML INSPIRE metadata file.
+      </rdfs:comment>
+       <rdfs:subClassOf rdf:resource="&s2;userProduct"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._PRD_MSIL1B_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]\.SAFE</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Metadata File (Level-1B)                  -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1bMetadataFile">
+      <rdfs:label xml:lang="en">User Product Level-1B: Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML metadata file provided inside the S2 Level-1B User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L1B_PDMC.*</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+      <!-- This xsd is in the product, but in the repository too -->
+      <drb:schemaLocation>
+          xsd/int/esa/sentinel-2/S2_User_Product_Level-1B_Metadata.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Metadata XSD (Level-1B)                   -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;userProductLevel1bMetadataXsd">
+      <rdfs:label xml:lang="en">User Product Level-1B: Metadata XML Schema</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML schema describing the metadata file provided inside the S2
+         Level-1B User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2_User_Product_Level-1B_Metadata.xsd</drb:nameMatch>
+         <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-1B)                        -->
+   <!-- ========================================= -->
+
+   <!-- TODO ATTENTION changement d'ID
+       <owl:Class rdf:about="&s2;pdi_level_1b_granule_container"> -->
+   <owl:Class rdf:about="&s2;level1bGranule">
+      <rdfs:label xml:lang="en">Level-1B Granule</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the granules composing the User Product Level-1B.
+         The PDI Level-1B granule consist of:
+         1. Level-1B_Granule_Metadata_File: XML metadata file containing the
+            requested level of information and referring all the product
+            elements composing the Granule;
+         2. IMG_DATA: folder containing the mission data corresponding to one
+            on-board scene for one detector and all spectral bands;
+         3. QI_DATA: folder containing XML reports including Quality control
+            checks and Quality Mask files;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schema that validate
+            the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Granule but they are removed when the PDI is
+         included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granule"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L1B_GR.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule Image File (Level-1B)             -->
+   <!-- ========================================= -->
+
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1b_image_file"> -->
+   <owl:Class rdf:about="&s2;level1bImageFile">
+      <rdfs:label xml:lang="en">Level-1B Image File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One JPEG2000 file per band.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L1B_.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)jp2</drb:nameMatch>
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule Metadata File (Level-1B)          -->
+   <!-- ========================================= -->
+
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1b_granule_metadata"> -->
+   <owl:Class rdf:about="&s2;level1bGranuleMetadataFile">
+      <rdfs:label xml:lang="en">Level-1B Granule Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The main XML metadata file provided inside each Level-1B tile.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granuleMetadataFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level1bGranule</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MTD_L1B_GR_.*</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-1B_Granule_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip (Level-1B)                      -->
+   <!-- ========================================= -->
+
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1b_datastrip_container"> -->
+   <owl:Class rdf:about="&s2;level1bDatastrip">
+      <rdfs:label xml:lang="en">Level-1B Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the datastrips for User Product Level-1B.
+         The PDI Level-1B Datastrip consists of:
+         1. Datastrip_Metadata_File: XML metadata file containing the requested
+            level of information and referring all the product elements
+            composing the Datastrip;
+         2. QI_DATA: folder containing XML reports including Quality control
+            checks information;
+         3. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         4. manifest.safe: XML SAFE Manifest file;
+         5. rep_info: folder containing the available XSD schemas that validate
+            the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Datastrip but they are removed when the PDI is
+         included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L1B_DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip Metadata File (Level-1B)        -->
+   <!-- ========================================= -->
+
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1b_datastrip_metadata"> -->
+   <owl:Class rdf:about="&s2;level1bDatastripMetadataFile">
+      <rdfs:label xml:lang="en">Level-1B Datastrip Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML Main Metadata file (DIMAP mandatory file) containing the requested
+         level of information and referring all the product elements describing
+         the datastrip.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastripMetadataFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MTD_L1B_DS_.*</drb:nameMatch>
+         <drb:parentClassTest>&s2;level1bDatastrip</drb:parentClassTest>
+      </drb:signature>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-1B_Datastrip_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+</rdf:RDF>
