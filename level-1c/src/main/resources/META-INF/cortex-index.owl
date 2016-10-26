@@ -41,11 +41,12 @@
       <rdfs:label xml:lang="en">Sentinel-2 Level-1C Ontology</rdfs:label>
    </owl:Ontology>
 
-   <!-- ============================ -->
-   <!-- User Level-1C Product        -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- User Level-1C Product                     -->
+   <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1c">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1C</rdfs:label>
@@ -115,9 +116,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Metadata File (Level-1C)     -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Metadata File (Level-1C)                  -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cMetadataFile">
@@ -130,16 +131,15 @@
          <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)L1C_PDMC.*|MTD_MSIL1C.*)</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
       </drb:signature>
-      <!-- This xsd is in the product, but in the repository too? TBC
+      <!-- This xsd is in the product, but in the repository too -->
       <drb:schemaLocation>
-          xsd/TODO.xsd
+          xsd/int/esa/sentinel-2/S2_User_Product_Level-1C_Metadata.xsd
       </drb:schemaLocation>
-      -->
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Metadata XSD (Level-1C)      -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Metadata XSD (Level-1C)                   -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1cMetadataXsd">
@@ -155,11 +155,12 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- =========================================== -->
-   <!-- Granule (Level-1C)                          -->
-   <!-- =========================================== -->
+   <!-- ========================================= -->
+   <!-- Granule (Level-1C)                        -->
+   <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_level_1c_tile_container"> -->
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1c_tile_container"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cGranule">
       <rdfs:label xml:lang="en">Level-1C Granule</rdfs:label>
@@ -176,6 +177,14 @@
             JPEG2000 algorithm, one file per band.
          3. QI_DATA: folder containing OLQC XML reports of quality checks, mask
             files and PVI file;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that
+            validate the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Granule but they are removed when the PDI is
+         included in the User Product.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;granule"/>
       <drb:signature rdf:parseType="Resource">
@@ -184,11 +193,12 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Tile Image File (Level-1C)   -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Tile Image File (Level-1C)                -->
+   <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_image_file"> -->
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1c_image_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cTileImageFile">
       <rdfs:label xml:lang="en">Level-1C Tile Image File</rdfs:label>
@@ -202,11 +212,12 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ================================= -->
-   <!-- Tile Metadata File (Level-1C)     -->
-   <!-- ================================= -->
+   <!-- ========================================= -->
+   <!-- Tile Metadata File (Level-1C)             -->
+   <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_tile_metadata"> -->
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1c_tile_metadata"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cGranuleMetadataFile">
       <rdfs:label xml:lang="en">Level-1C Granule Metadata File</rdfs:label>
@@ -221,20 +232,21 @@
          -->
          <drb:nameMatch>(S2[AB]_...._MTD_L1C_TL_.*|MTD_TL\.xml)</drb:nameMatch>
       </drb:signature>
-      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Tile_Metadata.xsd</drb:schemaLocation>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-1C_Tile_Metadata.xsd</drb:schemaLocation>
    </owl:Class>
 
-   <!-- ================================ -->
-   <!-- Datastrip (Level-1C)             -->
-   <!-- ================================ -->
+   <!-- ========================================= -->
+   <!-- Datastrip (Level-1C)                      -->
+   <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_container"> -->
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_container"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cDatastrip">
       <rdfs:label xml:lang="en">Level-1C Datastrip</rdfs:label>
       <rdfs:comment xml:lang="en">
          One of the datastrips for User Product Level-1C.
-         The PDI Level 1C DataStrip consist of:
+         The PDI Level 1C DataStrip consists of:
          1. DataStrip_Metadata_File: XML Main Metadata file (DIMAP mandatory
             file) containing the requested level of information and referring all
             the product elements describing the DataStrip.
@@ -248,11 +260,12 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ================================ -->
-   <!-- Datastrip Metadata File (Level-1C) -->
-   <!-- ================================ -->
+   <!-- ========================================= -->
+   <!-- Datastrip Metadata File (Level-1C)        -->
+   <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_metadata"> -->
+   <!-- TODO ATTENTION changement d'ID
+        <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_metadata"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cDatastripMetadataFile">
       <rdfs:label xml:lang="en">Level-1C Datastrip Metadata File</rdfs:label>
@@ -266,7 +279,7 @@
          <drb:nameMatch>(S2[AB]_...._MTD_L1C_DS_.*|MTD_DS.*)</drb:nameMatch>
          <drb:parentClassTest>&s2;level1cDatastrip</drb:parentClassTest>
       </drb:signature>
-      <drb:schemaLocation>xsd/dimap/V12/S2_PDI_Level-1C_Datastrip_Metadata.xsd</drb:schemaLocation>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-1C_Datastrip_Metadata.xsd</drb:schemaLocation>
    </owl:Class>
 
 </rdf:RDF>

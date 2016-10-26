@@ -41,9 +41,9 @@
       <rdfs:label xml:lang="en">Sentinel-2 Commons Ontology</rdfs:label>
    </owl:Ontology>
 
-   <!-- ============================ -->
-   <!-- Sentibel-2 Item              -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Sentibel-2 Item                           -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- This class is created mostly to give a parent to items that can be
@@ -68,9 +68,9 @@
    <!-- User                                                                 -->
    <!-- ==================================================================== -->
 
-   <!-- ============================ -->
-   <!-- User Product                 -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- User Product                              -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- ABSTRACT CLASS -->
@@ -146,9 +146,9 @@
          </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- GRANULE Wrapper              -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- GRANULE Wrapper                           -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- WARN NAME CHANGED -->
@@ -182,9 +182,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- DATASTRIP Wrapper            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- DATASTRIP Wrapper                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductDataStripFolder"> -->
    <!-- WARN NAME CHANGED -->
@@ -202,9 +202,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Auxiliary Data Folder        -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Auxiliary Data Folder                     -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- WARN NAME CHANGED -->
@@ -232,9 +232,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- HTML Folder                  -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- HTML Folder                               -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductHtmlFolder">
@@ -256,9 +256,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- User Product HTML File       -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- User Product HTML File                    -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductHtmlFile">
@@ -274,9 +274,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- User Product XSL File        -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- User Product XSL File                     -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductXslFile">
@@ -293,9 +293,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- INSPIRE File                 -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- INSPIRE File                              -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductInspireFile">
@@ -310,9 +310,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Product Metadata File        -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Product Metadata File                     -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_metadata"> -->
    <!-- Compliant with COMPACT NO MODIFICATION REQUIRED? TBC -->
@@ -333,9 +333,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- SAFE Manifest File           -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- SAFE Manifest File                        -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- WARN NAME CHANGED -->
@@ -357,9 +357,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Representation Information Folder -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Representation Information Folder         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductRepInfoFolder"> -->
    <!-- Compliant with COMPACT -->
@@ -384,9 +384,9 @@
    <!-- PDI                                                                  -->
    <!-- ==================================================================== -->
 
-   <!-- ============================ -->
-   <!-- Granule                      -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Granule                                   -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- WARN NAME CHANGED -->
@@ -434,9 +434,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ================================= -->
-   <!-- Granule Metadata File             -->
-   <!-- ================================= -->
+   <!-- ========================================= -->
+   <!-- Granule Metadata File                     -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- ABSTRACT CLASS -->
@@ -455,9 +455,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Datastrip                    -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Datastrip                                 -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- WARN NAME CHANGED -->
@@ -511,9 +511,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ================================ -->
-   <!-- Datastrip Metadata File          -->
-   <!-- ================================ -->
+   <!-- ========================================= -->
+   <!-- Datastrip Metadata File                   -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <!-- ABSTRACT CLASS -->
@@ -534,9 +534,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Image Data Folder            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Image Data Folder                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_image_folder"> -->
    <!-- Compliant with COMPACT NO MODIFICATION REQUIRED -->
@@ -553,9 +553,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control Folder       -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control Folder                    -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_quality_folder"> -->
    <!-- Compliant with COMPACT NO MODIFICATION REQUIRED -->
@@ -574,9 +574,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control File         -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control File                      -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_quality_control_file"> -->
    <!-- Compliant with COMPACT -->
@@ -592,14 +592,14 @@
          <drb:nameMatch>(S2[AB]_...._.*_(?i)report|SENSOR_QUALITY|GEOMETRIC_QUALITY|GENERAL_QUALITY|RADIOMETRIC_QUALITY|FORMAT_CORRECTNESS)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
-          xsd/olqc-report/OLQC_Report.xsd
+          xsd/int/esa/sentinel-2/OLQC_Report.xsd
       </drb:schemaLocation>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control File         -->
-   <!-- General Quality              -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control File                      -->
+   <!-- General Quality                           -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileGeneralQuality">
@@ -613,14 +613,14 @@
          <drb:nameMatch>(S2[AB]_...._.*_GENERAL_QUALITY_(?i)report|GENERAL_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
-          xsd/olqc-report/OLQC_Report.xsd
+          xsd/int/esa/sentinel-2/OLQC_Report.xsd
       </drb:schemaLocation>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control File         -->
-   <!-- Geometric Quality            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control File                      -->
+   <!-- Geometric Quality                         -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileGeometricQuality">
@@ -634,14 +634,14 @@
          <drb:nameMatch>(S2[AB]_...._.*_GEOMETRIC_QUALITY_(?i)report|GEOMETRIC_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
-          xsd/olqc-report/OLQC_Report.xsd
+          xsd/int/esa/sentinel-2/OLQC_Report.xsd
       </drb:schemaLocation>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control File         -->
-   <!-- Radiometric Quality          -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control File                      -->
+   <!-- Radiometric Quality                       -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileRadiometricQuality">
@@ -655,14 +655,14 @@
          <drb:nameMatch>(S2[AB]_...._.*_RADIOMETRIC_QUALITY_(?i)report|RADIOMETRIC_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
-          xsd/olqc-report/OLQC_Report.xsd
+          xsd/int/esa/sentinel-2/OLQC_Report.xsd
       </drb:schemaLocation>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control File         -->
-   <!-- Sensor Quality               -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control File                      -->
+   <!-- Sensor Quality                            -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileSensorQuality">
@@ -676,14 +676,14 @@
          <drb:nameMatch>(S2[AB]_...._.*_SENSOR_QUALITY_(?i)report|SENSOR_QUALITY)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
-          xsd/olqc-report/OLQC_Report.xsd
+          xsd/int/esa/sentinel-2/OLQC_Report.xsd
       </drb:schemaLocation>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Quality Control File         -->
-   <!-- Format Correctness           -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Quality Control File                      -->
+   <!-- Format Correctness                        -->
+   <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFileFormatCorrectnessQuality">
@@ -697,13 +697,13 @@
          <drb:nameMatch>(S2[AB]_...._.*_FORMAT_CORRECTNESS_(?i)report|FORMAT_CORRECTNESS)\.xml</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>
-          xsd/olqc-report/OLQC_Report.xsd
+          xsd/int/esa/sentinel-2/OLQC_Report.xsd
       </drb:schemaLocation>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File                    -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File                                 -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -719,9 +719,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: CLOLOW            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: CLOLOW                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clolow_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -741,9 +741,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: CLOUDS            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: CLOUDS                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -761,9 +761,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: TECQUA            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: TECQUA                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -781,9 +781,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: LANWAT            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: LANWAT                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_lanwat_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -801,9 +801,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: DETFOO            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: DETFOO                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_detfoo_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -820,9 +820,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: DEFECT            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: DEFECT                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_defect_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -839,9 +839,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: SATURA            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: SATURA                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_satura_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -858,9 +858,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: NODATA            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: NODATA                         -->
+   <!-- ========================================= -->
 
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_nodata_mask_file"> -->
    <!-- Compliant with COMPACT -->
@@ -878,9 +878,9 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ============================ -->
-   <!-- Mask File: DEMQUA            -->
-   <!-- ============================ -->
+   <!-- ========================================= -->
+   <!-- Mask File: DEMQUA                         -->
+   <!-- ========================================= -->
 
    <!-- TODO TBD Does this file-type exists??? Not in the last-of spec.... -->
    <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_demqua_mask_file"> -->
