@@ -45,7 +45,7 @@
    <!-- User Level-1C Product                     -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;userProductLevel1c">
@@ -159,7 +159,7 @@
    <!-- Granule (Level-1C)                        -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1c_tile_container"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cGranule">
@@ -168,7 +168,7 @@
          One of the granules composing the User Product Level-1C.
          There are N granules-folders each one corresponding to the Tiles
          composing the product.
-         The PDI Level-1C Tile consist of:
+         The PDI Level-1C Granule/Tile consists of:
          1. Level-1C_Tile_Metadata_File (Tile Metadata): XML Main Metadata
              file (DIMAP mandatory file) containing the requested level of
              information and referring all the product elements describing the
@@ -197,7 +197,7 @@
    <!-- Tile Image File (Level-1C)                -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1c_image_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cTileImageFile">
@@ -216,20 +216,17 @@
    <!-- Tile Metadata File (Level-1C)             -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1c_tile_metadata"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cGranuleMetadataFile">
       <rdfs:label xml:lang="en">Level-1C Granule Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         The main XML metadata file provided inside each Level-1C tile.
+         The XML metadata file provided inside each Level-1C tile.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;granuleMetadataFile"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;level1cGranule</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MTD_L1C_TL_.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MTD_L1C_TL_.*|MTD_TL\.xml)</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-1C_Tile_Metadata.xsd</drb:schemaLocation>
@@ -239,7 +236,7 @@
    <!-- Datastrip (Level-1C)                      -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_container"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cDatastrip">
@@ -252,6 +249,14 @@
             the product elements describing the DataStrip.
          2. QI_DATA: folder containing XML reports providing Quality control
             checks information.
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that
+            validate the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Datastrip but they are removed when the PDI is
+         included in the User Product.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
       <drb:signature rdf:parseType="Resource">
@@ -264,13 +269,13 @@
    <!-- Datastrip Metadata File (Level-1C)        -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1c_datastrip_metadata"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;level1cDatastripMetadataFile">
       <rdfs:label xml:lang="en">Level-1C Datastrip Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         XML Main Metadata file (DIMAP mandatory file) containing the requested
+         XML Metadata file (DIMAP mandatory file) containing the requested
          level of information and referring all the product elements describing
          the datastrip.
       </rdfs:comment>
