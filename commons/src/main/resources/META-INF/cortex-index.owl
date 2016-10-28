@@ -6,14 +6,12 @@
    <!ENTITY owl "http://www.w3.org/2002/07/owl#">
    <!ENTITY s2   "http://www.esa.int/s2#">
    <!ENTITY drb "http://www.gael.fr/drb#">
-   <!ENTITY jpeg "http://www.gael.fr/drb/jpeg#">
 ]>
 
 <rdf:RDF xmlns:owl="&owl;"
          xmlns:rdf="&rdf;"
          xmlns:rdfs="&rdfs;"
          xmlns:drb="&drb;"
-         xmlns:jpeg="&jpeg;"
          xmlns:s2="&s2;"
          xml:base="&s2;">
 
@@ -59,7 +57,6 @@
       </rdfs:comment>
      <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <!--<drb:nameMatch>S2[AB]_(...._(PRD|MSI)|MSIL..).*</drb:nameMatch>-->
          <drb:nameMatch>(S2[AB]_...._(PRD|MSI).*|S2[AB]_MSIL...*|L.._T....._A[0-9]{6}.*|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9].*)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -139,9 +136,6 @@
       <rdfs:subClassOf rdf:resource="&drb;safe-product"/>
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._PRD_MSI(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_.*\.SAFE</drb:nameMatch>
-         -->
          <drb:nameMatch>S2[AB]_(...._PRD_MSI(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MSIL.._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_N...._R[0-9]{3}.*)\.SAFE</drb:nameMatch>
          </drb:signature>
    </owl:Class>
@@ -186,7 +180,7 @@
    <!-- DATASTRIP Wrapper                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductDataStripFolder"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;userProductDataStripFolder"> -->
    <!-- WARN NAME CHANGED -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;datastripWrapper">
@@ -212,19 +206,28 @@
    <owl:Class rdf:about="&s2;auxiliaryDataFolder">
       <rdfs:label xml:lang="en">Auxiliary Data Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
-         AUX_DATA folder contains the auxiliary data files used for the
-         processing.
-         Folder containing auxiliary data items needed for processing and
-         provided with the product on request by the user. Some auxiliary data
-         (for instance IERS Bullettin and GIPPs files) can be provided either
-         with the product (if selected according to a specific download option)
-         or external to the product (referenced through the
-         Product_Metadata_File), others are only external to the product (for
-         instance the DEM used for the processing); in any case, all these
-         auxiliary data files are referenced in the XML Main metadata file.
-         In addition, the Level-1C embeds always an elementary set of
-         meteorological datasets extracted and resampled from ECMWF forecast
-         output.
+         PDI Granule L1C case:
+         Folder containing ECMWF data resampled in UTM projection (single files
+         in GRIB V1 format).
+         User Product case:
+         - L0 sub-case: Folder containing, if requested by the user (download
+         option), the GIPP files and IERS Bulletins used for the Level-0 User
+         Product production. All Level-0 auxiliary data are referenced in the
+         product metadata file.
+         - L1A sub-case: Folder containing, if requested by the user (download
+         option), the GIPP files and IERS Bulletins used for the Level-1A User
+         Product production. All Level-1A auxiliary data are referenced in the
+         product metadata file.
+         - L1B sub-case: Folder containing, if requested by the user (download
+         option), the GIPP files and IERS Bulletins used for the Level-1B User
+         Product production. All Level-1B auxiliary data are referenced in the
+         product metadata file.
+         - L1C sub-case: Folder containing, if requested by the user (download
+         option), the GIPP files and IERS Bulletins used for the Level-1C User
+         Product production. All Level-1C auxiliary data are referenced in the
+         product metadata file. In addition, the Level-1C User Product embeds
+         always at GRANULE (TILE) level an elementary set of meteorological
+         datasets resampled ECMWF in tile geometry.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
@@ -314,8 +317,8 @@
    <!-- Product Metadata File                     -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_metadata"> -->
-   <!-- Compliant with COMPACT NO MODIFICATION REQUIRED? TBC -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_metadata"> -->
+   <!-- Compliant with COMPACT -->
    <!-- ABSTRACT CLASS -->
    <owl:Class rdf:about="&s2;userProductMetadataFile">
       <rdfs:label xml:lang="en">User Product: Main Metadata File</rdfs:label>
@@ -325,9 +328,6 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <!--
-         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L(0P|1A|1B|1C)_PDMC.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MTD_MSIL..)\.xml</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
       </drb:signature>
@@ -361,7 +361,7 @@
    <!-- Representation Information Folder         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;userProductRepInfoFolder"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;userProductRepInfoFolder"> -->
    <!-- Compliant with COMPACT -->
    <!-- WARN NAME CHANGED -->
    <owl:Class rdf:about="&s2;representationInformationFolder">
@@ -426,9 +426,6 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}|L.._T....._A[0-9]{6}_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
          <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
       </drb:signature>
@@ -448,9 +445,6 @@
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;granule</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MTD_L1C_TL_.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MTD_L(0__GR|1A_GR|1B_GR|1C_TL)_.*|MTD_TL\.xml)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -504,9 +498,6 @@
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MSI_L(0__|1A_|1B_|1C_)DS.*_N[0-9]{2}\.[0-9]{2}|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_S[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -526,9 +517,6 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <!-- NB signature before COMPACT support
-         <drb:nameMatch>S2[AB]_...._MTD_L1C_DS_.*</drb:nameMatch>
-         -->
          <drb:nameMatch>(S2[AB]_...._MTD_L(0_|1A|1B|1C)_DS_.*|MTD_DS\.xml)</drb:nameMatch>
          <drb:parentClassTest>&s2;datastrip</drb:parentClassTest>
       </drb:signature>
@@ -538,7 +526,7 @@
    <!-- Image Data Folder                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_image_folder"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_image_folder"> -->
    <!-- Compliant with COMPACT NO MODIFICATION REQUIRED -->
    <owl:Class rdf:about="&s2;imageFolder">
       <rdfs:label xml:lang="en">Image Folder</rdfs:label>
@@ -557,7 +545,7 @@
    <!-- Quality Control Folder                    -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID <owl:Class rdf:about="&s2;pdi_quality_folder"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_quality_folder"> -->
    <!-- Compliant with COMPACT NO MODIFICATION REQUIRED -->
    <owl:Class rdf:about="&s2;qualityControlFolder">
       <rdfs:label xml:lang="en">Quality Control Folder</rdfs:label>
@@ -578,7 +566,7 @@
    <!-- Quality Control File                      -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_quality_control_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_quality_control_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;qualityControlFile">
       <rdfs:label xml:lang="en">Quality Control File</rdfs:label>
@@ -705,7 +693,7 @@
    <!-- Mask File                                 -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_mask_file"> -->
    <!-- Compliant with COMPACT -->
     <owl:Class rdf:about="&s2;maskFile">
       <rdfs:label xml:lang="en">Mask File</rdfs:label>
@@ -723,7 +711,7 @@
    <!-- Mask File: CLOLOW                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clolow_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_clolow_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;clolowMaskFile">
       <rdfs:label xml:lang="en">Coarse Cloud Mask File</rdfs:label>
@@ -745,7 +733,7 @@
    <!-- Mask File: CLOUDS                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;cloudsMaskFile">
       <rdfs:label xml:lang="en">Finer Cloud Mask File</rdfs:label>
@@ -765,7 +753,7 @@
    <!-- Mask File: TECQUA                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_clouds_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;tecquaMaskFile">
       <rdfs:label xml:lang="en">Technical Quality Mask File</rdfs:label>
@@ -785,7 +773,7 @@
    <!-- Mask File: LANWAT                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_lanwat_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_lanwat_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;lanwatMaskFile">
       <rdfs:label xml:lang="en">Land/Water Mask File</rdfs:label>
@@ -805,7 +793,7 @@
    <!-- Mask File: DETFOO                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_detfoo_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_detfoo_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;detfooMaskFile">
       <rdfs:label xml:lang="en">Detector Footprint Mask File</rdfs:label>
@@ -824,7 +812,7 @@
    <!-- Mask File: DEFECT                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_defect_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_defect_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;defectMaskFile">
       <rdfs:label xml:lang="en">Defective Pixels Mask File</rdfs:label>
@@ -843,7 +831,7 @@
    <!-- Mask File: SATURA                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_satura_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_satura_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;saturaMaskFile">
       <rdfs:label xml:lang="en">Saturated pixels Mask File</rdfs:label>
@@ -862,7 +850,7 @@
    <!-- Mask File: NODATA                         -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_nodata_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_nodata_mask_file"> -->
    <!-- Compliant with COMPACT -->
    <owl:Class rdf:about="&s2;nodataMaskFile">
       <rdfs:label xml:lang="en">Nodata Mask File</rdfs:label>
@@ -883,7 +871,7 @@
    <!-- ========================================= -->
 
    <!-- TODO TBD Does this file-type exists??? Not in the last-of spec.... -->
-   <!-- TODO ATTENTION changement d'ID<owl:Class rdf:about="&s2;pdi_demqua_mask_file"> -->
+   <!-- WARN ID changed <owl:Class rdf:about="&s2;pdi_demqua_mask_file"> -->
    <owl:Class rdf:about="&s2;demquaMaskFile">
       <rdfs:label xml:lang="en">DEM Quality Mask File</rdfs:label>
       <rdfs:comment xml:lang="en">
