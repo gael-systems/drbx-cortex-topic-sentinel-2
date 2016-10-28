@@ -45,7 +45,7 @@
    <!-- User Level-1A Product                     -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel1AProduct"> -->
    <owl:Class rdf:about="&s2;userProductLevel1a">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1A</rdfs:label>
@@ -158,13 +158,13 @@
    <!-- Granule (Level-1A)                        -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
        <owl:Class rdf:about="&s2;pdi_level_1a_granule_container"> -->
    <owl:Class rdf:about="&s2;level1aGranule">
       <rdfs:label xml:lang="en">Level-1A Granule</rdfs:label>
       <rdfs:comment xml:lang="en">
          One of the granules composing the User Product Level-1A.
-         The PDI Level-1A granule consist of:
+         The PDI Level-1A granule consists of:
          1. Level-1A_Granule_Metadata_File: XML metadata file containing the
             requested level of information and referring all the product
             elements composing the Granule;
@@ -192,7 +192,7 @@
    <!-- Granule Image File (Level-1A)             -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1a_image_file"> -->
    <owl:Class rdf:about="&s2;level1aImageFile">
       <rdfs:label xml:lang="en">Level-1A Image File</rdfs:label>
@@ -210,12 +210,12 @@
    <!-- Granule Metadata File (Level-1A)          -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1a_granule_metadata"> -->
    <owl:Class rdf:about="&s2;level1aGranuleMetadataFile">
       <rdfs:label xml:lang="en">Level-1A Granule Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         The main XML metadata file provided inside each Level-1A tile.
+         The XML metadata file provided inside each Level-1A granule.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;granuleMetadataFile"/>
       <drb:signature rdf:parseType="Resource">
@@ -229,7 +229,7 @@
    <!-- Datastrip (Level-1A)                      -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1a_datastrip_container"> -->
    <owl:Class rdf:about="&s2;level1aDatastrip">
       <rdfs:label xml:lang="en">Level-1A Datastrip</rdfs:label>
@@ -261,12 +261,12 @@
    <!-- Datastrip Metadata File (Level-1A)        -->
    <!-- ========================================= -->
 
-   <!-- TODO ATTENTION changement d'ID
+   <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_1a_datastrip_metadata"> -->
    <owl:Class rdf:about="&s2;level1aDatastripMetadataFile">
       <rdfs:label xml:lang="en">Level-1A Datastrip Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
-         XML Main Metadata file (DIMAP mandatory file) containing the requested
+         XML Metadata file (DIMAP mandatory file) containing the requested
          level of information and referring all the product elements describing
          the datastrip.
       </rdfs:comment>
