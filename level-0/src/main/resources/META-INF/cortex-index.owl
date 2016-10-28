@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<!DOCTYPE rdf:RDF [
+   <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+   <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+   <!ENTITY s2   "http://www.esa.int/s2#">
+   <!ENTITY drb "http://www.gael.fr/drb#">
+   <!ENTITY jpeg2000 "http://www.gael.fr/drb/jpeg2000#">
+]>
+
+<rdf:RDF xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;"
+         xmlns:drb="&drb;"
+         xmlns:jpeg2000="&jpeg2000;"
+         xmlns:s2="&s2;"
+         xml:base="&s2;">
+
+<!--
+* Data Hub Service (DHuS) - For Space data distribution.
+* Copyright (C) 2013,2014,2015,2016 GAEL Systems
+*
+* This file is part of DHuS software sources.
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as
+* published by the Free Software Foundation, either version 3 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+   <owl:Ontology rdf:about="&s2;">
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Ontology</rdfs:label>
+   </owl:Ontology>
+
+   <!-- ========================================= -->
+   <!-- User Level-0 Product                      -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+        <owl:Class rdf:about="&s2;userLevel0Product"> -->
+   <owl:Class rdf:about="&s2;userProductLevel0">
+      <rdfs:label xml:lang="en">Sentinel-2 User Product Level-0</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Level-0 product is generated from the Sentinel-2 instrument and 
+         ancillary telemetries. It contains raw data after restoration of the 
+         chronological data sequence at full space/time resolution with all 
+         auxiliary and ancillary information to be used in subsequent
+         processing. In fact the Level-0 product contains all the information
+         required to generate the Level-1 (and upper) product levels. The 
+         Level-0 consolidation processing stores the Quick Look image in the L0
+         DataStrip PDI. Reprocessing is from archived consolidated L0 which
+         include QL image to get Level 1 products.
+         One Level-0 product refers always to one Datatake; it can cover the 
+         full Datatake or an its extract. It may refer to one or several
+         DataStrips from the same Datatake.
+         The Level-0 User product consists of: 
+         1. Product_Metadata_File: This is the mandatory XML main metadata file
+         (DIMAP) containing the requested level of information and referring
+         all the product elements.
+         2. manifest.safe: this is the SAFE metadata file (optional). It is
+         included in the product only if the user requests a SAFE product as
+         output format (according to a specific download option).
+         3. GRANULE: folder containing all granules composing the product
+         (Image Data). The Image Data files inside each Granule are provided as
+         a set of 13 binary files, one image file per band corresponding to a
+         given detector.
+         4. DATASTRIP: folder containing the DataStrip composing the product
+         linked to the selected granules.
+         5. AUX_DATA: folder containing, if requested by the user (download
+         option), the GIPP files and IERS Bulletins used for the Level-0 User
+         Product production. All Level-0 auxiliary data are referenced in the
+         product metadata file.
+         6. ANC_DATA: folder containing the Satellite Ancillary Data (SAD)
+         needed for the processing (GPS data, attitude data, etc.). The SAD are
+         always provided as a set of unitary Raw Data files each matching a
+         single packet type. Those files are provided on the same temporal
+         extent of the SAD embedded in the last Datastrip selected to be
+         included in the product.
+         7. rep_info: folder containing the XSD schema provided inside the 
+         product. This folder is optional. It will be included in the final
+         product if the user select the SAFE format as output format.
+         8. Browse_Image: PNG file consisting of an image limited to 3
+         visible-bands in ground geometry at 320m resolution. This file,
+         provided if required by the user (download option), gives an overview
+         of the product (sub-sampled) mainly for image data browsing and
+         selection purposes.
+         9. INSPIRE: XML INSPIRE metadata file.
+         10. HTML: folder containing an HTML product presentation file
+         (UserProduct_index.html) and the corresponding stylesheet
+         (UserProduct_index.xsl).
+         Note: The number of the Granules available within a L0 product is
+         variable and driven by the active detectors list specified at
+         Datastrip level (ACTIVE_DETECTOR metadata). The list of the active
+         detectors depends on the MSI acquisition mode (compression by-passed
+         or not).
+         Compression mode is reported in the MSI packet by the MODOP field.
+         In the nominal products the compression is enabled and all detectors
+         are available; in case of calibration products the compression is
+         by-passed and only a subset of detectors are active and therefore
+         available.
+      </rdfs:comment>
+       <rdfs:subClassOf rdf:resource="&s2;userProduct"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._PRD_MSIL0P_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]\.SAFE</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Metadata File (Level-0)                   -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;userProductLevel0MetadataFile">
+      <rdfs:label xml:lang="en">User Product Level-0: Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML metadata file provided inside the S2 Level-0 User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L0P_PDMC.*</drb:nameMatch>
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+      </drb:signature>
+      <!-- This xsd is in the product, but in the repository too -->
+      <drb:schemaLocation>
+          xsd/int/esa/sentinel-2/S2_User_Product_Level-0_Metadata.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Metadata XSD (Level-0)                    -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;userProductLevel0MetadataXsd">
+      <rdfs:label xml:lang="en">User Product Level-0: Metadata XML Schema</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML schema describing the metadata file provided inside the S2
+         Level-0 User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2_User_Product_Level-0_Metadata.xsd</drb:nameMatch>
+         <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-0)                         -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+       <owl:Class rdf:about="&s2;pdi_level_0_granule_container"> -->
+   <owl:Class rdf:about="&s2;level0Granule">
+      <rdfs:label xml:lang="en">Level-0 Granule</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the granules composing the User Product Level-0.
+         The PDI Level-0 granule consists of:
+         1. Level-0_Granule_Metadata_File: XML metadata file containing the
+            requested level of information and referring all the product
+            elements composing the Granule;
+         2. IMG_DATA: folder containing the mission data corresponding to one
+            on-board scene for one detector and all spectral bands. The image
+            data are provided as a set of 13 binary files, one for each spectral
+            band, including all corresponding Image Source Packets (ISP) in the
+            observation chronological sequence. The ISPs include their
+            corresponding source packet annotations as a pre-pended header of
+            each source packet;
+         3. QI_DATA: folder containing XML reports about Geometric quality,
+            Image content quality, Quality control checks information;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that validate
+            the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Granule but they are removed when the PDI is
+         included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granule"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L0__GR.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule ISP File (Level-0)                -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+        <owl:Class rdf:about="&s2;pdi_isp"> -->
+   <owl:Class rdf:about="&s2;level0IspFile">
+      <rdfs:label xml:lang="en">Level-0 ISP File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Level 0 CCSDS formatted source packets data. One file per band.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L0_.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)bin</drb:nameMatch>
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule Metadata File (Level-0)           -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+        <owl:Class rdf:about="&s2;pdi_level_0_granule_metadata"> -->
+   <owl:Class rdf:about="&s2;level0GranuleMetadataFile">
+      <rdfs:label xml:lang="en">Level-0 Granule Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML metadata file containing the requested level of information and
+         referring all the product elements composing the Granule.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granuleMetadataFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level0Granule</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MTD_L0__GR_.*</drb:nameMatch>
+      </drb:signature>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-0_Granule_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip (Level-0)                       -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+        <owl:Class rdf:about="&s2;pdi_level_0_datastrip_container"> -->
+   <owl:Class rdf:about="&s2;level0Datastrip">
+      <rdfs:label xml:lang="en">Level-0 Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the datastrips for User Product Level-0.
+         The PDI Level-0 Datastrip consists of:
+         1. Datastrip_Metadata_File: XML metadata file containing the requested
+            level of information and referring all the product elements
+            composing the Datastrip;
+         2. QI_DATA: folder containing the preliminary QuickLook files in JP2
+            format and XML reports providing Quality control check results;
+         3. ANC_DATA: folder containing SAD raw data provided on temporal
+            extent of the full Datatake if the Datastrip is the last one in a
+            given Datatake, otherwise the SAD coverage is from the start of the
+            Datatake (to which the Datastrip belongs to) to the stop of the
+            Datastrip itself. SAD data are provided as a set of unitary Raw Data
+            files each matching a single packet type;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schema that validate
+            the PDI components
+         Note that the ANC_DATA, Inventory_Metadata.xml, manifest.safe and
+         rep_info are available inside a Datastrip but they are removed when
+         the PDI is included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L0__DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip QuickLook File (Level-0)        -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;level0QuicklookFile">
+      <rdfs:label xml:lang="en">Level-0 QuickLook File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Preliminary Quick Look files (JPEG2000 format). There is up to 5 files.
+         The number of files could be potentially less than 5 in degraded cases.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._QLK_L0__DS.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)jp2</drb:nameMatch>
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip Metadata File (Level-0)         -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+        <owl:Class rdf:about="&s2;pdi_level_0_datastrip_metadata"> -->
+   <owl:Class rdf:about="&s2;level0DatastripMetadataFile">
+      <rdfs:label xml:lang="en">Level-0 Datastrip Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML Metadata file (DIMAP mandatory file) containing the requested level
+         of information and referring all the product elements describing the
+         datastrip.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastripMetadataFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MTD_L0__DS_.*</drb:nameMatch>
+         <drb:parentClassTest>&s2;level0Datastrip</drb:parentClassTest>
+      </drb:signature>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-0_Datastrip_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Ancillary Data                            -->
+   <!-- ========================================= -->
+
+   <!-- WARN ID changed
+        <owl:Class rdf:about="&s2;pdi_anc_folder"> -->
+   <owl:Class rdf:about="&s2;ancillaryDataFolder">
+      <rdfs:label xml:lang="en">Ancillary Data Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         PDI Case:
+         Folder containing SAD raw data as received from the DFEP. Note that
+         this folder is provided only inside a Level-0 Datastrip PDI.
+         User product case:
+         Folder containing the Satellite Ancillary Data (SAD) needed for the
+         processing (GPS data, attitude data, etc.). The SAD are always provided
+         as a set of unitary Raw Data files each matching a single packet type.
+         Those files are provided on the same temporal extent of the SAD
+         embedded in the last Datastrip selected to be included in the product.
+         Raw Satellite Ancillary Data (SAD) are provided inside the Level-0
+         User Product within the ANC_DATA folder. SAD data (DPC and DFEP
+         annotated source packets, cf. §4.6.2.1) are splitted in binary files
+         divided by PRID and SID (cf. Table 3-9). In order to have the maximum
+         coverage of the raw SAD in the L0 User Product, the latest SAD related
+         to the downlink time will be embeded in the product.
+         The decoded SAD, useful for further processing are provided at
+         Datastrip level through the Datastrip metadata file. In particular,
+         these data allow computing the associated geometric model and include:
+         * Time Correlation Data (sampled at 1Hz);
+         * Imaging orbit number;
+         * Ephemeris data;
+         * Attitudes data (sampled at 10Hz);
+         * Thermal data.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;pdi_container</drb:parentIsSubClassTest>
+         <drb:nameTest>ANC_DATA</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+</rdf:RDF>
