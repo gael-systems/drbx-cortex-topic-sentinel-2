@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <properties>
+      <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+   </properties>
+
+   <groupId>fr.gael.cortex</groupId>
+   <artifactId>drbx-cortex-topic-sentinel-2-level-2a</artifactId>
+   <packaging>jar</packaging>
+   <version>1.0.0</version>
+
+   <parent>
+      <groupId>fr.gael</groupId>
+      <artifactId>maven</artifactId>
+      <version>1-0-rc-5</version>
+      <relativePath></relativePath>
+   </parent>
+
+   <dependencies>
+      <dependency>
+         <groupId>fr.gael.cortex</groupId>
+         <artifactId>drbx-cortex-topic-sentinel-2-commons</artifactId>
+         <version>1.0.0</version>
+      </dependency>
+   </dependencies>
+</project>
