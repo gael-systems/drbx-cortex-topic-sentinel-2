@@ -24,6 +24,7 @@
       <module>level-1a</module>
       <module>level-1b</module>
       <module>level-1c</module>
+      <module>level-2a</module>
    </modules>
 
    <build>
