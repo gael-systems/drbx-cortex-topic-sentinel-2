@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>fr.gael.cortex</groupId>
-   <artifactId>drbx-cortex-topic-sentinel-2</artifactId>
+   <groupId>fr.gael.drb.cortex</groupId>
+   <artifactId>sentinel-2</artifactId>
    <packaging>pom</packaging>
    <version>1.0.0</version>
 
-   <name>Cortex Topics for Sentinel-2</name>
+   <name>Cortex Topics for Sentinel-2 Suite</name>
 
    <parent>
       <groupId>fr.gael</groupId>

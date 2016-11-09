@@ -8,10 +8,12 @@
       <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
    </properties>
 
-   <groupId>fr.gael.cortex</groupId>
+   <groupId>fr.gael.drb.cortex.sentinel-2</groupId>
    <artifactId>drbx-cortex-topic-sentinel-2-level-1c</artifactId>
    <packaging>jar</packaging>
    <version>1.0.0</version>
+
+   <name>Cortex Topics for Sentinel-2 Level 1C</name>
 
    <parent>
       <groupId>fr.gael</groupId>
@@ -22,7 +24,7 @@
 
    <dependencies>
       <dependency>
-         <groupId>fr.gael.cortex</groupId>
+         <groupId>fr.gael.drb.cortex.sentinel-2</groupId>
          <artifactId>drbx-cortex-topic-sentinel-2-commons</artifactId>
          <version>1.0.0</version>
       </dependency>
