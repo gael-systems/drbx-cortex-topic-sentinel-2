@@ -7,7 +7,7 @@
    <groupId>fr.gael.drb.cortex</groupId>
    <artifactId>sentinel-2</artifactId>
    <packaging>pom</packaging>
-   <version>1.0.0</version>
+   <version>1.0.1-SNAPSHOT</version>
 
    <name>Cortex Topics for Sentinel-2 Suite</name>
 
