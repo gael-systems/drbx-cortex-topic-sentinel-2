@@ -139,8 +139,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L1B_PDMC.*</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameMatch>S2[AB]_...._MTD_(SAF|DMP)L1B_PDMC.*</drb:nameMatch>
       </drb:signature>
       <!-- This xsd is in the product, but in the repository too -->
       <drb:schemaLocation>
@@ -160,8 +160,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2_User_Product_Level-1B_Metadata.xsd</drb:nameMatch>
          <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
+         <drb:nameMatch>S2_User_Product_Level-1B_Metadata.xsd</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -194,8 +194,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;granule"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._MSI_L1B_GR.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
          <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MSI_L1B_GR.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -212,8 +212,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._MSI_L1B_.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)jp2</drb:nameMatch>
          <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MSI_L1B_.*_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -263,8 +263,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._MSI_L1B_DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
          <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MSI_L1B_DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -283,8 +283,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;datastripMetadataFile"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._MTD_L1B_DS_.*</drb:nameMatch>
          <drb:parentClassTest>&s2;level1bDatastrip</drb:parentClassTest>
+         <drb:nameMatch>S2[AB]_...._MTD_L1B_DS_.*</drb:nameMatch>
       </drb:signature>
       <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-1B_Datastrip_Metadata.xsd</drb:schemaLocation>
    </owl:Class>

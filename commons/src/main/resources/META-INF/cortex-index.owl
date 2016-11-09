@@ -171,8 +171,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>GRANULE</drb:nameTest>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameTest>GRANULE</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -191,8 +191,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>DATASTRIP</drb:nameTest>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameTest>DATASTRIP</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -254,8 +254,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>HTML</drb:nameTest>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameTest>HTML</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -272,8 +272,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>UserProduct_index.html</drb:nameTest>
          <drb:parentClassTest>&s2;HTML</drb:parentClassTest>
+         <drb:nameTest>UserProduct_index.html</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -291,8 +291,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>UserProduct_index.xsl</drb:nameTest>
          <drb:parentClassTest>&s2;HTML</drb:parentClassTest>
+         <drb:nameTest>UserProduct_index.xsl</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -308,8 +308,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>INSPIRE\..*</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameMatch>INSPIRE\..*</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -328,8 +328,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MTD_MSIL..)\.xml</drb:nameMatch>
          <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)(L0P|L1A|L1B|L1C|L2A|TCI)_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MTD_MSIL..)\.xml</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -352,8 +352,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;safe-manifest"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>manifest.safe</drb:nameTest>
          <drb:parentIsSubClassTest>&s2;item</drb:parentIsSubClassTest>
+         <drb:nameTest>manifest.safe</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -375,8 +375,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>rep_info</drb:nameTest>
          <drb:parentIsSubClassTest>&s2;item</drb:parentIsSubClassTest>
+         <drb:nameTest>rep_info</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
@@ -426,8 +426,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}|L.._T....._A[0-9]{6}_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
          <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MSI_L(0__GR|1A_GR|1B_GR|1C_TL).*_N[0-9]{2}\.[0-9]{2}|L.._T....._A[0-9]{6}_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -517,8 +517,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;xml"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(S2[AB]_...._MTD_L(0_|1A|1B|1C)_DS_.*|MTD_DS\.xml)</drb:nameMatch>
          <drb:parentClassTest>&s2;datastrip</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MTD_L(0_|1A|1B|1C)_DS_.*|MTD_DS\.xml)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -536,8 +536,8 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameTest>IMG_DATA</drb:nameTest>
          <drb:parentClassTest>&s2;granule</drb:parentClassTest>
+         <drb:nameTest>IMG_DATA</drb:nameTest>
       </drb:signature>
    </owl:Class>
 
