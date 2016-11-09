@@ -11,7 +11,7 @@
    <groupId>fr.gael.drb.cortex.sentinel-2</groupId>
    <artifactId>drbx-cortex-topic-sentinel-2-level-1c</artifactId>
    <packaging>jar</packaging>
-   <version>1.0.1-SNAPSHOT</version>
+   <version>1.0.x-SNAPSHOT</version>
 
    <name>Cortex Topics for Sentinel-2 Level 1C</name>
 
@@ -26,7 +26,7 @@
       <dependency>
          <groupId>fr.gael.drb.cortex.sentinel-2</groupId>
          <artifactId>drbx-cortex-topic-sentinel-2-commons</artifactId>
-         <version>1.0.1-SNAPSHOT</version>
+         <version>1.0.x-SNAPSHOT</version>
       </dependency>
    </dependencies>
 </project>
