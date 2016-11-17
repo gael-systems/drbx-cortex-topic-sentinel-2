@@ -47,7 +47,9 @@
 
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel1AProduct"> -->
-   <owl:Class rdf:about="&s2;userProductLevel1a">
+   <!-- Back to previous ID for compatibility
+   <owl:Class rdf:about="&s2;userProductLevel1a">-->
+   <owl:Class rdf:about="&s2;userLevel1AProduct">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1A</rdfs:label>
       <rdfs:comment xml:lang="en">
          Level-1A product is obtained by decompressing image data and
