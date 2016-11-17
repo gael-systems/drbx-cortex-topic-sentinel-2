@@ -48,7 +48,9 @@
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel1CProduct"> -->
    <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;userProductLevel1c">
+   <!-- Back to previous ID for compatibility
+   <owl:Class rdf:about="&s2;userProductLevel1c">-->
+   <owl:Class rdf:about="&s2;userLevel1CProduct">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1C</rdfs:label>
       <rdfs:comment xml:lang="en">
          Level-1C is an orthoimage product, i.e. a map projection of the

@@ -47,7 +47,9 @@
 
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel1BProduct"> -->
-   <owl:Class rdf:about="&s2;userProductLevel1b">
+   <!-- Back to previous ID for compatibility
+   <owl:Class rdf:about="&s2;userProductLevel1b">-->
+   <owl:Class rdf:about="&s2;userLevel1BProduct">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-1B</rdfs:label>
       <rdfs:comment xml:lang="en">
          The Level-1B product is a Radio-corrected and geo-refined product
