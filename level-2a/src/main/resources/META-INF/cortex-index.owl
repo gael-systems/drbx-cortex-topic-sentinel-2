@@ -47,8 +47,9 @@
 
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel2AProduct"> -->
-   <!-- Compliant with COMPACT -->
-   <owl:Class rdf:about="&s2;userProductLevel2a">
+   <!-- Back to previous ID for compatibility
+   <owl:Class rdf:about="&s2;userProductLevel2a">-->
+   <owl:Class rdf:about="&s2;userLevel2AProduct">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-2A</rdfs:label>
       <rdfs:comment xml:lang="en">
       </rdfs:comment>

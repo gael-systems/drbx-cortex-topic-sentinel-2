@@ -47,7 +47,9 @@
 
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;userLevel0Product"> -->
-   <owl:Class rdf:about="&s2;userProductLevel0">
+   <!-- Back to previous ID for compatibility
+   <owl:Class rdf:about="&s2;userProductLevel0">-->
+   <owl:Class rdf:about="&s2;userLevel0Product">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-0</rdfs:label>
       <rdfs:comment xml:lang="en">
          Level-0 product is generated from the Sentinel-2 instrument and 
