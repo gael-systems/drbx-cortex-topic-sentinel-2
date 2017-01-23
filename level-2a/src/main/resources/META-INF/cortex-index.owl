@@ -52,10 +52,448 @@
    <owl:Class rdf:about="&s2;userLevel2AProduct">
       <rdfs:label xml:lang="en">Sentinel-2 User Product Level-2A</rdfs:label>
       <rdfs:comment xml:lang="en">
+         TODO
       </rdfs:comment>
        <rdfs:subClassOf rdf:resource="&s2;userProduct"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._PRD_MSIL2A_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]\.SAFE</drb:nameMatch>
+         <drb:nameMatch>S2[AB]_(...._PRD_MSIL2A_PDMC_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_R[0-9]{3}_V[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]|MSIL2A_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_N...._R[0-9]{3}.*)\.SAFE</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Metadata File (Level-2A)                  -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;userProductLevel2aMetadataFile">
+      <rdfs:label xml:lang="en">User Product Level-2A: Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML metadata file provided inside the S2 Level-2A User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;userProduct</drb:parentIsSubClassTest>
+         <drb:nameMatch>(S2[AB]_...._MTD_(SAF|DMP)L2A_PDMC.*|MTD_MSIL2A.*)</drb:nameMatch>
+      </drb:signature>
+      <!-- This xsd is in the product, but in the repository too -->
+      <drb:schemaLocation>
+          xsd/int/esa/sentinel-2/S2_User_Product_Level-2A_Metadata.xsd
+      </drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Metadata XSD (Level-2A)                   -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;userProductLevel2aMetadataXsd">
+      <rdfs:label xml:lang="en">User Product Level-2A: Metadata XML Schema</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML schema describing the metadata file provided inside the S2
+         Level-2A User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
+         <drb:nameMatch>S2_User_Product_Level-2A_Metadata.xsd</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- SAFE Level-2A Manifest File               -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;sentinel2Level2aSafeManifestFile">
+      <rdfs:label xml:lang="en">Sentinel-2 Level-2A SAFE Manifest File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML file with fixed name L2A_Manifest.xml.
+         There are two manifests in a Level-2A product:
+         * the manifest.safe: comes from the Level-1C product used to generate
+           the Level-2A product.
+         * the L2A_Manifest.xml: the Level-2A product.'s manifest.         
+      </rdfs:comment>
+      <!--<rdfs:subClassOf rdf:resource="&drb;safe-manifest"/>-->
+      <rdfs:subClassOf rdf:resource="&drb;xml"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentIsSubClassTest>&s2;item</drb:parentIsSubClassTest>
+         <drb:nameTest>L2A_Manifest.xml</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-2A)                        -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aGranule">
+      <rdfs:label xml:lang="en">Level-2A Granule</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the granules composing the User Product Level-2A.
+         A granule-folder corresponds to the Tile composing the product.
+         The PDI Level-2A Granule/Tile consists of:
+         1. Level-2A_Tile_Metadata_File (Tile Metadata): XML Main Metadata
+             file (DIMAP mandatory file) containing the requested level of
+             information and referring all the product elements describing the
+             tile,
+         2. IMG_DATA: folder containing image data files compressed using the
+            JPEG2000 algorithm, one file per band.
+         3. QI_DATA: folder containing OLQC XML reports of quality checks, mask
+            files and PVI file;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that
+            validate the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Granule but they are removed when the PDI is
+         included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granule"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MSI_L2A_TL.*_N[0-9]{2}\.[0-9]{2}|L2A_T....._A[0-9]{6}_[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-2A) / RXXm                 -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <!-- ABSTRACT CLASS -->
+   <owl:Class rdf:about="&s2;level2aGranuleRXXm">
+      <rdfs:label xml:lang="en">Level-2A Granule: Resolution XXm Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Abstract class for R10m, R20m and R60m folders.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+         <drb:nameMatch>R(10|20|60)m</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-2A) / R10m                 -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aGranuleR10m">
+      <rdfs:label xml:lang="en">Level-2A Granule: Resolution 10m Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Image resolution = 10m.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;level2aGranuleRXXm"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+         <drb:nameTest>R10m</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-2A) / R20m                 -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aGranuleR20m">
+      <rdfs:label xml:lang="en">Level-2A Granule: Resolution 20m Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Image resolution = 20m.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;level2aGranuleRXXm"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+         <drb:nameTest>R20m</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Granule (Level-2A) / R60m                 -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aGranuleR60m">
+      <rdfs:label xml:lang="en">Level-2A Granule: Resolution 60m Folder</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Image resolution = 60m.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;level2aGranuleRXXm"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;imageFolder</drb:parentClassTest>
+         <drb:nameTest>R60m</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Image File (Level-2A)                -->
+   <!--    (Surface Reflectance Image)            -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileSurfaceReflectanceImage">
+      <rdfs:label xml:lang="en">Level-2A Tile Image File (Surface Reflectance Image)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Surface Reflectance Image.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._MSI_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Image File (Level-2A)                -->
+   <!--    (Resampled AOT Image)                  -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileResampledAOTImage">
+      <rdfs:label xml:lang="en">Level-2A Tile Image File (Resampled AOT Image)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Resampled AOT Image.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._AOT_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_AOT)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Image File (Level-2A)                -->
+   <!--    (Water Vapour Image)                   -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileWaterVapourImage">
+      <rdfs:label xml:lang="en">Level-2A Tile Image File (Water Vapour Image)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Water Vapour Image.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._WVP_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_WVP)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Image File (Level-2A)                -->
+   <!--    (Scene Classification Tile)            -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileSceneClassificationTile">
+      <rdfs:label xml:lang="en">Level-2A Tile Image File (Scene Classification Tile)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Scene Classification Tile.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._SCL_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_SCL)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Image File (Level-2A)                -->
+   <!--    (True Color Image)                     -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileTrueColorImage">
+      <rdfs:label xml:lang="en">Level-2A Tile Image File (True Color Image)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         True Color Image.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._TCI_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_TCI)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Metadata File (Level-2A)             -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aGranuleMetadataFile">
+      <rdfs:label xml:lang="en">Level-2A Granule Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML metadata file provided inside each Level-2A tile.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;granuleMetadataFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aGranule</drb:parentClassTest>
+         <drb:xqueryTest>
+            let $var := name(.)
+            return
+            if (fn:matches($var, "(S2[AB]_...._MTD_L2A_TL_.*|MTD_TL\.xml)") and
+                ../../../*[matches(name(), "L2A_Manifest.xml")])
+            then 1
+            else 0
+         </drb:xqueryTest>
+      </drb:signature>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-2A_Tile_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tile Metadata XSD (Level-2A)              -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aGranuleMetadataXsd">
+      <rdfs:label xml:lang="en">Level-2A Granule Metadata XML Schema</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML schema describing the metadata file provided inside the S2
+         Level-2A Granule.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
+         <drb:nameMatch>S2_PDI_Level-2A_Tile_Metadata.xsd</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip (Level-2A)                      -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aDatastrip">
+      <rdfs:label xml:lang="en">Level-2A Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         One of the datastrips for User Product Level-2A.
+         The PDI Level 2A DataStrip consists of:
+         1. DataStrip_Metadata_File: XML Main Metadata file (DIMAP mandatory
+            file) containing the requested level of information and referring all
+            the product elements describing the DataStrip.
+         2. QI_DATA: folder containing XML reports providing Quality control
+            checks information.
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that
+            validate the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Datastrip but they are removed when the PDI is
+         included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
+         <drb:xqueryTest>
+            let $var := name(.)
+            return
+            if (fn:matches($var, "(S2[AB]_...._MSI_L2A_DS.*_N[0-9]{2}\.[0-9]{2}|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_S[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])") and
+                ../../*[matches(name(), "L2A_Manifest.xml")])
+            then 1
+            else 0
+         </drb:xqueryTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip Metadata File (Level-2A)        -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aDatastripMetadataFile">
+      <rdfs:label xml:lang="en">Level-2A Datastrip Metadata File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         XML Metadata file (DIMAP mandatory file) containing the requested
+         level of information and referring all the product elements describing
+         the datastrip.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;datastripMetadataFile"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;level2aDatastrip</drb:parentClassTest>
+         <drb:xqueryTest>
+            let $var := name(.)
+            return
+            if (fn:matches($var, "(S2[AB]_...._MTD_L2A_DS_.*|MTD_DS.*)") and
+                ../../../*[matches(name(), "L2A_Manifest.xml")])
+            then 1
+            else 0
+         </drb:xqueryTest>
+      </drb:signature>
+      <drb:schemaLocation>xsd/int/esa/sentinel-2/S2_PDI_Level-2A_Datastrip_Metadata.xsd</drb:schemaLocation>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Datastrip Metadata XSD (Level-2A)         -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aDatastripMetadataXsd">
+      <rdfs:label xml:lang="en">Level-2A Datastrip Metadata XML Schema</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The XML schema describing the metadata file provided inside the S2
+         Level-2A Datastrip.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;representationInformationFolder</drb:parentClassTest>
+         <drb:nameMatch>S2_PDI_Level-2A_Datastrip_Metadata.xsd</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Under QI_DATA Folder:                     -->
+   <!-- L2A Quality Mask:                         -->
+   <!-- Confidence Cloud Mask File                -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileConfidenceCloudMaskFile">
+      <rdfs:label xml:lang="en">Level-2A Quality Mask (Confidence Cloud Mask File)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Level-2A Quality Mask (Confidence Cloud Mask File).
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._CLD_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_CLD)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Under QI_DATA Folder:                     -->
+   <!-- L2A Quality Mask:                         -->
+   <!-- Confidence Snow Mask File                 -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFileConfidenceSnowMaskFile">
+      <rdfs:label xml:lang="en">Level-2A Quality Mask (Confidence Snow Mask File)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Level-2A Quality Mask (Confidence Snow Mask File).
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._SNW_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_SNW)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Under QI_DATA Folder:                     -->
+   <!-- PVI Tile Preview Image                    -->
+   <!-- ========================================= -->
+
+   <!-- Compliant with COMPACT -->
+   <owl:Class rdf:about="&s2;level2aTileImageFilePviTilePreviewImage">
+      <rdfs:label xml:lang="en">PVI Tile Preview Image</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         PVI Tile Preview Image.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:parentClassTest>&s2;qualityControlFolder</drb:parentClassTest>
+         <drb:nameMatch>(S2[AB]_...._PVI_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_PVI)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
