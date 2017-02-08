@@ -162,6 +162,7 @@
 
    <!-- Compliant with COMPACT -->
    <!-- ABSTRACT CLASS -->
+   <!--
    <owl:Class rdf:about="&s2;level2aGranuleRXXm">
       <rdfs:label xml:lang="en">Level-2A Granule: Resolution XXm Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -173,12 +174,14 @@
          <drb:nameMatch>R(10|20|60)m</drb:nameMatch>
       </drb:signature>
    </owl:Class>
+   -->
 
    <!-- ========================================= -->
    <!-- Granule (Level-2A) / R10m                 -->
    <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
+   <!--
    <owl:Class rdf:about="&s2;level2aGranuleR10m">
       <rdfs:label xml:lang="en">Level-2A Granule: Resolution 10m Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -190,12 +193,14 @@
          <drb:nameTest>R10m</drb:nameTest>
       </drb:signature>
    </owl:Class>
+   -->
 
    <!-- ========================================= -->
    <!-- Granule (Level-2A) / R20m                 -->
    <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
+   <!--
    <owl:Class rdf:about="&s2;level2aGranuleR20m">
       <rdfs:label xml:lang="en">Level-2A Granule: Resolution 20m Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -207,12 +212,14 @@
          <drb:nameTest>R20m</drb:nameTest>
       </drb:signature>
    </owl:Class>
+   -->
 
    <!-- ========================================= -->
    <!-- Granule (Level-2A) / R60m                 -->
    <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
+   <!--
    <owl:Class rdf:about="&s2;level2aGranuleR60m">
       <rdfs:label xml:lang="en">Level-2A Granule: Resolution 60m Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
@@ -224,6 +231,7 @@
          <drb:nameTest>R60m</drb:nameTest>
       </drb:signature>
    </owl:Class>
+   -->
 
    <!-- ========================================= -->
    <!-- Tile Image File (Level-2A)                -->
@@ -238,7 +246,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <!--<drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>-->
          <drb:nameMatch>(S2[AB]_...._MSI_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9])_B(01|02|03|04|05|06|07|08|09|10|11|12|8A)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -256,7 +264,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <!--<drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>-->
          <drb:nameMatch>(S2[AB]_...._AOT_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_AOT)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -274,7 +282,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <!--<drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>-->
          <drb:nameMatch>(S2[AB]_...._WVP_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_WVP)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -292,7 +300,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <!--<drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>-->
          <drb:nameMatch>(S2[AB]_...._SCL_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_SCL)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
@@ -310,7 +318,7 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&jpeg2000;JPEG2000"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>
+         <!--<drb:parentClassTest>&s2;level2aGranuleRXXm</drb:parentClassTest>-->
          <drb:nameMatch>(S2[AB]_...._TCI_L2A_.*|L2A_T....._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9]_TCI)_(10|20|60)m\.(?i)jp2</drb:nameMatch>
       </drb:signature>
    </owl:Class>
