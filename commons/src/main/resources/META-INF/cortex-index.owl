@@ -60,6 +60,16 @@
          <drb:nameMatch>(S2[AB]_...._(PRD|MSI).*|S2[AB]_MSIL...*|L.._T....._A[0-9]{6}.*|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9].*)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
+   
+   <owl:Class rdf:about="&s2;itemZipped">
+      <rdfs:label xml:lang="en">Sentinel-2 Zipped Item</rdfs:label>
+     <rdfs:subClassOf rdf:resource="&s2;item"/>
+     <rdfs:subClassOf rdf:resource="&drb;zip"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i).*\.zip</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+  
 
    <!-- ==================================================================== -->
    <!-- User                                                                 -->
