@@ -188,7 +188,9 @@
       <rdfs:subClassOf rdf:resource="&s2;granule"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2[AB]_...._MSI_L0__GR.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <!--
          <drb:parentClassTest>&s2;granuleWrapper</drb:parentClassTest>
+         -->
       </drb:signature>
    </owl:Class>
 
@@ -264,7 +266,9 @@
       <rdfs:subClassOf rdf:resource="&s2;datastrip"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2[AB]_...._MSI_L0__DS.*_N[0-9]{2}\.[0-9]{2}</drb:nameMatch>
+         <!--
          <drb:parentClassTest>&s2;datastripWrapper</drb:parentClassTest>
+         -->
       </drb:signature>
    </owl:Class>
 
@@ -343,6 +347,117 @@
       <drb:signature rdf:parseType="Resource">
          <drb:parentIsSubClassTest>&s2;pdi_container</drb:parentIsSubClassTest>
          <drb:nameTest>ANC_DATA</drb:nameTest>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =================================================================== -->
+   <!-- TARED Granule and Datastrip                                         -->
+   <!-- =================================================================== -->
+
+   <!-- ========================================= -->
+   <!-- Tar Granule (Level-0)                     -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;level0GranuleTar">
+      <rdfs:label xml:lang="en">Level-0 Tar Granule</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The PDI Level-0 Tar granule contains a PDI Level-0 granule, which
+         consists of:
+         1. Level-0_Granule_Metadata_File: XML metadata file containing the
+            requested level of information and referring all the product
+            elements composing the Granule;
+         2. IMG_DATA: folder containing the mission data corresponding to one
+            on-board scene for one detector and all spectral bands. The image
+            data are provided as a set of 13 binary files, one for each spectral
+            band, including all corresponding Image Source Packets (ISP) in the
+            observation chronological sequence. The ISPs include their
+            corresponding source packet annotations as a pre-pended header of
+            each source packet;
+         3. QI_DATA: folder containing XML reports about Geometric quality,
+            Image content quality, Quality control checks information;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schemas that validate
+            the PDI components.
+         Note that the Inventory_Metadata.xml, manifest.safe and rep_info are
+         available inside a Granule but they are removed when the PDI is
+         included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L0__GR.*_N[0-9]{2}\.[0-9]{2}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tar Datastrip (Level-0)                   -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;level0DatastripTar">
+      <rdfs:label xml:lang="en">Level-0 Tar Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         The PDI Level-0 Tar Datastrip contains a PDI Level-0 Datastrip, which
+         consists of:
+         1. Datastrip_Metadata_File: XML metadata file containing the requested
+            level of information and referring all the product elements
+            composing the Datastrip;
+         2. QI_DATA: folder containing the preliminary QuickLook files in JP2
+            format and XML reports providing Quality control check results;
+         3. ANC_DATA: folder containing SAD raw data provided on temporal
+            extent of the full Datatake if the Datastrip is the last one in a
+            given Datatake, otherwise the SAD coverage is from the start of the
+            Datatake (to which the Datastrip belongs to) to the stop of the
+            Datastrip itself. SAD data are provided as a set of unitary Raw Data
+            files each matching a single packet type;
+         4. Inventory_Metadata.xml: file containing the metadata needed to
+            inventory the PDI;
+         5. manifest.safe: XML SAFE Manifest file;
+         6. rep_info: folder containing the available XSD schema that validate
+            the PDI components
+         Note that the ANC_DATA, Inventory_Metadata.xml, manifest.safe and
+         rep_info are available inside a Datastrip but they are removed when
+         the PDI is included in the User Product.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L0__DS.*_N[0-9]{2}\.[0-9]{2}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tar HKTM (Level-0)                        -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;level0HktmTar">
+      <rdfs:label xml:lang="en">Level-0 Tar HKTM</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         House Keeping Telemetry (HKTM) PDI are routed to FOS after their
+         generation at CGS.
+         Spacecraft housekeeping telemetry is part of the ancillary data and is
+         regularly downlinked to ground stations (every orbit). Raw VCDUs are
+         provided with DFEP annotation as a separated file.
+         The HKTM PDI is formatted according to SAFE Specifications.
+         It is defined as a tar file. It consists of:
+         1. Measurement Data file (Binary File): binary encoded file containing
+         the stream of HKTM Transfer Frames TFs.
+         2. DFEP Annotation file (Binary File): binary file composed by one
+         record for each HKTM TF, containing the TF annotations computed by the
+         DFEP.
+         3. manifest.safe (XML File): manifest file that includes metadata
+         information describing the overall context where the HKTM data are
+         generated (mission, product history, timing, orbit, etc.) and providing
+         information regarding the content and structure of the product, through
+         references to the other components present in the product.
+         4. rep_info (Folder): folder containing the XSD schemas related to the
+         Measurement Data and DFEP Annotation.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._PRD_HKTM___[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_[0-9]{4}\.tar</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
