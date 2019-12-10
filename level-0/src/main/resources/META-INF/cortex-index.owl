@@ -121,7 +121,7 @@
    <!-- ========================================= -->
 
    <owl:Class rdf:about="&s2;userProductLevel0MetadataFile">
-      <rdfs:label xml:lang="en">User Product Level-0: Metadata File</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 User Product Level-0: Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
          The XML metadata file provided inside the S2 Level-0 User Product.
       </rdfs:comment>
@@ -141,7 +141,7 @@
    <!-- ========================================= -->
 
    <owl:Class rdf:about="&s2;userProductLevel0MetadataXsd">
-      <rdfs:label xml:lang="en">User Product Level-0: Metadata XML Schema</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 User Product Level-0: Metadata XML Schema</rdfs:label>
       <rdfs:comment xml:lang="en">
          The XML schema describing the metadata file provided inside the S2
          Level-0 User Product.
@@ -160,7 +160,7 @@
    <!-- WARN ID changed
        <owl:Class rdf:about="&s2;pdi_level_0_granule_container"> -->
    <owl:Class rdf:about="&s2;level0Granule">
-      <rdfs:label xml:lang="en">Level-0 Granule</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Granule</rdfs:label>
       <rdfs:comment xml:lang="en">
          One of the granules composing the User Product Level-0.
          The PDI Level-0 granule consists of:
@@ -201,7 +201,7 @@
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_isp"> -->
    <owl:Class rdf:about="&s2;level0IspFile">
-      <rdfs:label xml:lang="en">Level-0 ISP File</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 ISP File</rdfs:label>
       <rdfs:comment xml:lang="en">
          Level 0 CCSDS formatted source packets data. One file per band.
       </rdfs:comment>
@@ -219,7 +219,7 @@
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_0_granule_metadata"> -->
    <owl:Class rdf:about="&s2;level0GranuleMetadataFile">
-      <rdfs:label xml:lang="en">Level-0 Granule Metadata File</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Granule Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
          XML metadata file containing the requested level of information and
          referring all the product elements composing the Granule.
@@ -239,7 +239,7 @@
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_0_datastrip_container"> -->
    <owl:Class rdf:about="&s2;level0Datastrip">
-      <rdfs:label xml:lang="en">Level-0 Datastrip</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Datastrip</rdfs:label>
       <rdfs:comment xml:lang="en">
          One of the datastrips for User Product Level-0.
          The PDI Level-0 Datastrip consists of:
@@ -277,7 +277,7 @@
    <!-- ========================================= -->
 
    <owl:Class rdf:about="&s2;level0QuicklookFile">
-      <rdfs:label xml:lang="en">Level-0 QuickLook File</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 QuickLook File</rdfs:label>
       <rdfs:comment xml:lang="en">
          Preliminary Quick Look files (JPEG2000 format). There is up to 5 files.
          The number of files could be potentially less than 5 in degraded cases.
@@ -296,7 +296,7 @@
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_level_0_datastrip_metadata"> -->
    <owl:Class rdf:about="&s2;level0DatastripMetadataFile">
-      <rdfs:label xml:lang="en">Level-0 Datastrip Metadata File</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Datastrip Metadata File</rdfs:label>
       <rdfs:comment xml:lang="en">
          XML Metadata file (DIMAP mandatory file) containing the requested level
          of information and referring all the product elements describing the
@@ -317,7 +317,7 @@
    <!-- WARN ID changed
         <owl:Class rdf:about="&s2;pdi_anc_folder"> -->
    <owl:Class rdf:about="&s2;ancillaryDataFolder">
-      <rdfs:label xml:lang="en">Ancillary Data Folder</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Ancillary Data Folder</rdfs:label>
       <rdfs:comment xml:lang="en">
          PDI Case:
          Folder containing SAD raw data as received from the DFEP. Note that
@@ -351,7 +351,7 @@
    </owl:Class>
 
    <!-- =================================================================== -->
-   <!-- TARED Granule and Datastrip                                         -->
+   <!-- TAR Granule and Datastrip                                           -->
    <!-- =================================================================== -->
 
    <!-- ========================================= -->
@@ -359,7 +359,7 @@
    <!-- ========================================= -->
 
    <owl:Class rdf:about="&s2;level0GranuleTar">
-      <rdfs:label xml:lang="en">Level-0 Tar Granule</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Tar Granule</rdfs:label>
       <rdfs:comment xml:lang="en">
          The PDI Level-0 Tar granule contains a PDI Level-0 granule, which
          consists of:
@@ -396,7 +396,7 @@
    <!-- ========================================= -->
 
    <owl:Class rdf:about="&s2;level0DatastripTar">
-      <rdfs:label xml:lang="en">Level-0 Tar Datastrip</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Tar Datastrip</rdfs:label>
       <rdfs:comment xml:lang="en">
          The PDI Level-0 Tar Datastrip contains a PDI Level-0 Datastrip, which
          consists of:
@@ -427,12 +427,12 @@
       </drb:signature>
    </owl:Class>
 
-   <!-- ========================================= -->
-   <!-- Tar HKTM (Level-0)                        -->
-   <!-- ========================================= -->
+   <!-- =================================================================== -->
+   <!-- TAR HKTM (Level-0)                                                  -->
+   <!-- =================================================================== -->
 
    <owl:Class rdf:about="&s2;level0HktmTar">
-      <rdfs:label xml:lang="en">Level-0 Tar HKTM</rdfs:label>
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Tar HKTM</rdfs:label>
       <rdfs:comment xml:lang="en">
          House Keeping Telemetry (HKTM) PDI are routed to FOS after their
          generation at CGS.
@@ -458,6 +458,33 @@
       <rdfs:subClassOf rdf:resource="&drb;tar"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2[AB]_...._PRD_HKTM___[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_[0-9]{4}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =================================================================== -->
+   <!-- TAR SAD PDI (AUX)                                                   -->
+   <!-- =================================================================== -->
+
+   <owl:Class rdf:about="&s2;pdiSadTar">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary Tar SAD PDI</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      RAW Satellite Ancillary Data (SAD) data are systematically downlinked to
+      ground stations at the end of each downlink as source packets provided
+      with their DFEP annotation.
+      Each SAD packets include their corresponding source packet binary
+      annotations as a pre-pended header. A source packet header consists
+      (according to this order) in:
+      * DPC annotation computed during the L0 processing DPC annotation;
+      * DFEP annotation as received from the DFEP.
+      SAD data (used mainly by the POD) are stored as a PDI.
+      A SAD PDI consists in a single tar file containing a set of unitary Raw
+      SAD files each matching a single packet type. Those files cover the
+      temporal extent of the full orbit.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._AUX_SADATA_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_......._.._..\.tar</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
