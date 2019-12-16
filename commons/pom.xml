@@ -18,7 +18,7 @@
    <parent>
       <groupId>fr.gael</groupId>
       <artifactId>maven</artifactId>
-      <version>1-0-rc-5</version>
+      <version>1-0-rc-4</version>
       <relativePath></relativePath>
    </parent>
 </project>
