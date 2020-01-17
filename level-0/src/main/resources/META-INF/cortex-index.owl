@@ -514,4 +514,86 @@
       </drb:signature>
    </owl:Class>
 
+   <!-- =================================================================== -->
+   <!-- GIPP (AUX)                                                          -->
+   <!-- =================================================================== -->
+
+   <!-- ========================================= -->
+   <!-- GIPP TGZ                                  -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2A_OPER_GIP_ATMIMA_MPC__20150605T094744_V20150622T000000_21000101T000000_B00.TGZ
+   -->
+   <owl:Class rdf:about="&s2;gippTgz">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary GIPP Tar/Gz</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      TODO
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tgz"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.TGZ</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- GIPP TAR                                  -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2A_OPER_GIP_ATMIMA_MPC__20150605T094744_V20150622T000000_21000101T000000_B00.tar
+   -->
+   <owl:Class rdf:about="&s2;gippTar">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary GIPP Tar</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      TODO
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- GIPP XML Header                           -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2A_OPER_GIP_ATMIMA_MPC__20150605T094744_V20150622T000000_21000101T000000_B00.HDR
+   -->
+   <owl:Class rdf:about="&s2;gippTarXmlHeader">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary GIPP Tar: XML Header</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;xml-content"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.HDR</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- GIPP Data Block File                      -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2A_OPER_GIP_ATMIMA_MPC__20150605T094744_V20150622T000000_21000101T000000_B00.DBL
+   -->
+   <owl:Class rdf:about="&s2;gippTarDataBlockFile">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary GIPP Tar: Data Block File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.DBL</drb:nameMatch>
+      </drb:signature>
+      <!--
+      <drb:implementationIdentifier>sdf</drb:implementationIdentifier>
+      <drb:schemaLocation>
+      </drb:schemaLocation>
+      -->
+   </owl:Class>
+
 </rdf:RDF>
