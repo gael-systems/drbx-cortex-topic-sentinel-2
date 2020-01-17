@@ -57,7 +57,7 @@
       </rdfs:comment>
      <rdfs:subClassOf rdf:resource="&drb;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(S2[AB]_...._(PRD|MSI).*|S2[AB]_MSIL...*|L.._T....._A[0-9]{6}.*|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9].*)</drb:nameMatch>
+         <drb:nameMatch>(S2[AB]_...._(PRD|MSI|GIP).*|S2[AB]_MSIL...*|L.._T....._A[0-9]{6}.*|DS_...._[0-9]{4}[0-1][0-9][0-3][0-9]T[0-2][0-9][0-6][0-9][0-6][0-9].*)</drb:nameMatch>
       </drb:signature>
    </owl:Class>
    
