@@ -528,12 +528,14 @@
    <owl:Class rdf:about="&s2;gippTgz">
       <rdfs:label xml:lang="en">Sentinel-2 Auxiliary GIPP Tar/Gz</rdfs:label>
       <rdfs:comment xml:lang="en">
-      TODO
+         Sentinel-2 Auxiliary GIPP Tar/Gz main class.
+         The Tar/Gz contains an XML Header ".HDR" file, and a Data Block File
+         ".DBL".
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <rdfs:subClassOf rdf:resource="&drb;tgz"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.TGZ</drb:nameMatch>
+         <drb:nameMatch>S2[AB_]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.TGZ</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -547,12 +549,12 @@
    <owl:Class rdf:about="&s2;gippTar">
       <rdfs:label xml:lang="en">Sentinel-2 Auxiliary GIPP Tar</rdfs:label>
       <rdfs:comment xml:lang="en">
-      TODO
+         Sentinel-2 Auxiliary GIPP Tar main class.
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <rdfs:subClassOf rdf:resource="&drb;tar"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(?i)S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.tar</drb:nameMatch>
+         <drb:nameMatch>(?i)S2[AB_]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.tar</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -570,7 +572,7 @@
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <rdfs:subClassOf rdf:resource="&drb;xml-content"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(?i)S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.HDR</drb:nameMatch>
+         <drb:nameMatch>(?i)S2[AB_]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.HDR</drb:nameMatch>
       </drb:signature>
    </owl:Class>
 
@@ -587,13 +589,66 @@
       </rdfs:comment>
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
-         <drb:nameMatch>(?i)S2[AB]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.DBL</drb:nameMatch>
+         <drb:nameMatch>(?i)S2[AB_]_...._GIP_......_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_...\.DBL</drb:nameMatch>
       </drb:signature>
       <!--
       <drb:implementationIdentifier>sdf</drb:implementationIdentifier>
       <drb:schemaLocation>
       </drb:schemaLocation>
       -->
+   </owl:Class>
+
+   <!-- ================================================================== -->
+   <!-- SENTINEL-2 Auxiliary EOF abstract class                            -->
+   <!-- WARN this class is not a subclass of 'Sentinel-2 Item'             -->
+   <!-- ================================================================== -->
+
+   <owl:Class rdf:about="&s2;auxiliaryEof">
+      <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product</rdfs:label>
+      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2._...._.*\.EOF</drb:nameMatch>
+      </drb:signature>
+      <drb:implementationIdentifier>xml</drb:implementationIdentifier>
+   </owl:Class>
+
+   <!-- POD Abstract class ========= -->
+
+   <owl:Class rdf:about="&s2;auxiliaryPod">
+      <rdfs:label xml:lang="en">SENTINEL-2 Precise Orbit Determination (POD) Auxiliary Product</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Generic class for POD products.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryEof"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2._...._AUX_(RESORB|PREORB)_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.EOF</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- AUX_RESORB ================= -->
+
+   <owl:Class rdf:about="&s2;auxiliaryPodResorb">
+      <rdfs:label xml:lang="en">SENTINEL-2 Restituted Orbit File Auxiliary Product</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         This file contains the Restituted Precise Orbit Determination Data.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryPod"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2(A|B)_...._AUX_RESORB_.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- AUX_PREORB ================= -->
+
+   <owl:Class rdf:about="&s2;auxiliaryPodPreorb">
+      <rdfs:label xml:lang="en">SENTINEL-2 Predicted Orbit File Auxiliary Product</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         This file contains the Predicted Precise Orbit Determination Data.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryPod"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2(A|B)_...._AUX_PREORB_.*</drb:nameMatch>
+      </drb:signature>
    </owl:Class>
 
 </rdf:RDF>
