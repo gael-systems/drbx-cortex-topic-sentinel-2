@@ -457,6 +457,39 @@
    <!-- TAR HKTM (Level-0)                                                  -->
    <!-- =================================================================== -->
 
+   <!-- ========================================= -->
+   <!-- TAR HKTM (Level-0): Zip container         -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;level0HktmTarZipped">
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Tar HKTM  (ZIP container)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;itemZipped"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._PRD_HKTM___.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- TAR HKTM (Level-0): Folder intermediate   -->
+   <!--                     container             -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;level0HktmTarFolder">
+      <rdfs:label xml:lang="en">Sentinel-2 Level-0 Tar HKTM (Folder intermediate container)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._PRD_HKTM___[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_[0-9]{4}</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- TAR HKTM (Level-0): TAR product           -->
+   <!-- ========================================= -->
+
    <owl:Class rdf:about="&s2;level0HktmTar">
       <rdfs:label xml:lang="en">Sentinel-2 Level-0 Tar HKTM</rdfs:label>
       <rdfs:comment xml:lang="en">
