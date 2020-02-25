@@ -491,6 +491,39 @@
    <!-- TAR SAD PDI (AUX)                                                   -->
    <!-- =================================================================== -->
 
+   <!-- ========================================= -->
+   <!-- TAR SAD PDI (AUX): ZIP container          -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;pdiSadTarZipped">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary Tar SAD PDI (ZIP container)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;itemZipped"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._AUX_SADATA_.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- TAR SAD PDI (AUX): Folder intermediate    -->
+   <!--                    container              -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;pdiSadTarFolder">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary Tar SAD PDI (Folder intermediate container)</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._AUX_SADATA_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}_......._.._..</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- TAR SAD PDI (AUX): TAR product            -->
+   <!-- ========================================= -->
+
    <owl:Class rdf:about="&s2;pdiSadTar">
       <rdfs:label xml:lang="en">Sentinel-2 Auxiliary Tar SAD PDI</rdfs:label>
       <rdfs:comment xml:lang="en">
