@@ -671,7 +671,7 @@
 
    <owl:Class rdf:about="&s2;auxiliaryEof">
       <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product</rdfs:label>
-      <rdfs:subClassOf rdf:resource="&drb;item"/>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2._...._.*\.EOF</drb:nameMatch>
       </drb:signature>
