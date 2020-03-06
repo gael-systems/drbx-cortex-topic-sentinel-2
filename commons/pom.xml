@@ -11,7 +11,7 @@
    <groupId>fr.gael.drb.cortex.sentinel-2</groupId>
    <artifactId>drbx-cortex-topic-sentinel-2-commons</artifactId>
    <packaging>jar</packaging>
-   <version>2.0-SNAPSHOT</version>
+   <version>1.0.10</version>
 
    <name>Cortex Topics for Sentinel-2 Commons</name>
 
