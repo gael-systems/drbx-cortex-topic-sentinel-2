@@ -410,8 +410,11 @@
          available inside a Granule but they are removed when the PDI is
          included in the User Product.
       </rdfs:comment>
+      <!--
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      -->
+      <rdfs:subClassOf rdf:resource="&s2;granuleTileTar"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2[AB]_...._MSI_L0__GR.*_N[0-9]{2}\.[0-9]{2}\.tar</drb:nameMatch>
       </drb:signature>
@@ -446,8 +449,11 @@
          rep_info are available inside a Datastrip but they are removed when
          the PDI is included in the User Product.
       </rdfs:comment>
+      <!--
       <rdfs:subClassOf rdf:resource="&s2;item"/>
       <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      -->
+      <rdfs:subClassOf rdf:resource="&s2;datastripTar"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2[AB]_...._MSI_L0__DS.*_N[0-9]{2}\.[0-9]{2}\.tar</drb:nameMatch>
       </drb:signature>

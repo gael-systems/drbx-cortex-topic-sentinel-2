@@ -40,7 +40,7 @@
    </owl:Ontology>
 
    <!-- ========================================= -->
-   <!-- Sentibel-2 Item                           -->
+   <!-- Sentinel-2 Item                           -->
    <!-- ========================================= -->
 
    <!-- Compliant with COMPACT -->
@@ -393,6 +393,42 @@
    <!-- ==================================================================== -->
    <!-- PDI                                                                  -->
    <!-- ==================================================================== -->
+
+   <!-- =================================================================== -->
+   <!-- TAR Granule and Datastrip                                           -->
+   <!-- =================================================================== -->
+
+   <!-- ========================================= -->
+   <!-- Tar Granule/Tile (L0,L1B,L1C,L2A)         -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;granuleTileTar">
+      <rdfs:label xml:lang="en">Sentinel-2 Tar Granule/Tile</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         TODO
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L(0_|1B|1C|2A)_(GR|TL).*_N[0-9]{2}\.[0-9]{2}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- Tar Datastrip (L0,L1B,L1C,L2A)            -->
+   <!-- ========================================= -->
+
+   <owl:Class rdf:about="&s2;datastripTar">
+      <rdfs:label xml:lang="en">Sentinel-2 Tar Datastrip</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         TODO
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB]_...._MSI_L(0_|1B|1C|2A)_DS.*_N[0-9]{2}\.[0-9]{2}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
 
    <!-- ========================================= -->
    <!-- Granule                                   -->
