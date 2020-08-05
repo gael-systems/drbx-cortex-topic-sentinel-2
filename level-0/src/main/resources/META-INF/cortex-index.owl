@@ -670,14 +670,229 @@
       -->
    </owl:Class>
 
+   <!-- =================================================================== -->
+   <!-- AUX_ECMWFD and AUX_UT1UTC (software class)                          -->
+   <!-- =================================================================== -->
+
+   <!-- Example
+   S2__OPER_AUX_ECMWFD_PDMC_20190216T120000_V20190217T090000_20190217T210000.TGZ
+   S2__OPER_AUX_UT1UTC_PDMC_20191024T000000_V20191025T000000_20201024T000000.TGZ
+   -->
+   <owl:Class rdf:about="&s2;auxEcmwfdUt1utcTgz">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary ECMWFD/UT1UTC Tar/Gz</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Abstract class for Sentinel-2 Auxiliary ECMWFD and UT1UTC Tar/Gz.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tgz"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB_]_...._AUX_(ECMWFD|UT1UTC)_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.(TGZ|tar.gz)</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- =================================================================== -->
+   <!-- AUX_ECMWFD                                                          -->
+   <!-- =================================================================== -->
+
+   <!-- ========================================= -->
+   <!-- AUX_ECMWFD TGZ                            -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_ECMWFD_PDMC_20190216T120000_V20190217T090000_20190217T210000.TGZ
+   -->
+   <owl:Class rdf:about="&s2;auxEcmwfdTgz">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary ECMWFD Tar/Gz</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Sentinel-2 Auxiliary ECMWFD Tar/Gz main class.
+         The Tar/Gz contains an XML Header ".HDR" file, and a Data Block File
+         ".DBL".
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;auxEcmwfdUt1utcTgz"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB_]_...._AUX_ECMWFD_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\..*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- AUX_ECMWFD TAR                            -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_ECMWFD_PDMC_20190216T120000_V20190217T090000_20190217T210000.tar
+   -->
+   <owl:Class rdf:about="&s2;auxEcmwfdTar">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary ECMWFD Tar</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Sentinel-2 Auxiliary ECMWFD Tar main class.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB_]_...._AUX_ECMWFD_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- AUX_ECMWFD XML Header                     -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_ECMWFD_PDMC_20190216T120000_V20190217T090000_20190217T210000.HDR
+   -->
+   <owl:Class rdf:about="&s2;auxEcmwfdTarXmlHeader">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary ECMWFD Tar: XML Header</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;xml-content"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB_]_...._AUX_ECMWFD_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.HDR</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- AUX_ECMWFD Data Block File                -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_ECMWFD_PDMC_20190216T120000_V20190217T090000_20190217T210000.DBL
+   -->
+   <owl:Class rdf:about="&s2;auxEcmwfdTarDataBlockFile">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary ECMWFD Tar: Data Block File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB_]_...._AUX_ECMWFD_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.DBL</drb:nameMatch>
+      </drb:signature>
+      <!--
+      <drb:implementationIdentifier>sdf</drb:implementationIdentifier>
+      <drb:schemaLocation>
+      </drb:schemaLocation>
+      -->
+   </owl:Class>
+
+   <!-- =================================================================== -->
+   <!-- AUX_UT1UTC                                                          -->
+   <!-- =================================================================== -->
+
+   <!-- ========================================= -->
+   <!-- AUX_UT1UTC TGZ                            -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_UT1UTC_PDMC_20191024T000000_V20191025T000000_20201024T000000.TGZ
+   -->
+   <owl:Class rdf:about="&s2;auxut1utcTgz">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary UT1UTC Tar/Gz</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Sentinel-2 Auxiliary UT1UTC Tar/Gz main class.
+         The Tar/Gz contains an XML Header ".HDR" file, and a Data Block File
+         ".DBL".
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;auxEcmwfdUt1utcTgz"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2[AB_]_...._AUX_UT1UTC_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\..*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- AUX_UT1UTC TAR                            -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_UT1UTC_PDMC_20191024T000000_V20191025T000000_20201024T000000.tar
+   -->
+   <owl:Class rdf:about="&s2;auxut1utcTar">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary UT1UTC Tar</rdfs:label>
+      <rdfs:comment xml:lang="en">
+         Sentinel-2 Auxiliary UT1UTC Tar main class.
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;tar"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB_]_...._AUX_UT1UTC_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.tar</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- AUX_UT1UTC XML Header                     -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_UT1UTC_PDMC_20191024T000000_V20191025T000000_20201024T000000.HDR
+   -->
+   <owl:Class rdf:about="&s2;auxut1utcTarXmlHeader">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary UT1UTC Tar: XML Header</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&drb;xml-content"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB_]_...._AUX_UT1UTC_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.HDR</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ========================================= -->
+   <!-- AUX_UT1UTC Data Block File                -->
+   <!-- ========================================= -->
+
+   <!-- Example
+   S2__OPER_AUX_UT1UTC_PDMC_20191024T000000_V20191025T000000_20201024T000000.DBL
+   -->
+   <owl:Class rdf:about="&s2;auxut1utcTarDataBlockFile">
+      <rdfs:label xml:lang="en">Sentinel-2 Auxiliary UT1UTC Tar: Data Block File</rdfs:label>
+      <rdfs:comment xml:lang="en">
+      </rdfs:comment>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>(?i)S2[AB_]_...._AUX_UT1UTC_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}\.DBL</drb:nameMatch>
+      </drb:signature>
+      <!--
+      <drb:implementationIdentifier>sdf</drb:implementationIdentifier>
+      <drb:schemaLocation>
+      </drb:schemaLocation>
+      -->
+   </owl:Class>
+
+   <!-- ================================================================== -->
+   <!-- Abstract class for                                                 -->
+   <!-- SENTINEL-2 Auxiliary EOF folder                                    -->
+   <!-- and                                                                -->
+   <!-- SENTINEL-2 Auxiliary EOF abstract class                            -->
+   <!-- Software use only                                                  -->
+   <!--    (since EOF products can be packaged either as monofiles         -->
+   <!--           or as folder with EOF file inside)                       -->
+   <!-- ================================================================== -->
+
+   <owl:Class rdf:about="&s2;auxiliaryEofAbstract">
+      <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product Abstract class</rdfs:label>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2._...._AUX_(RESORB|PREORB)_.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================================================== -->
+   <!-- SENTINEL-2 Auxiliary EOF folder                                    -->
+   <!-- ================================================================== -->
+
+   <owl:Class rdf:about="&s2;auxiliaryEofFolder">
+      <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product Folder</rdfs:label>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryEofAbstract"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2._...._AUX_(RESORB|PREORB)_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
    <!-- ================================================================== -->
    <!-- SENTINEL-2 Auxiliary EOF abstract class                            -->
-   <!-- WARN this class is not a subclass of 'Sentinel-2 Item'             -->
    <!-- ================================================================== -->
 
    <owl:Class rdf:about="&s2;auxiliaryEof">
       <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product</rdfs:label>
-      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryEofAbstract"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2._...._.*\.EOF</drb:nameMatch>
       </drb:signature>
