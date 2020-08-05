@@ -857,13 +857,42 @@
    </owl:Class>
 
    <!-- ================================================================== -->
+   <!-- Abstract class for                                                 -->
+   <!-- SENTINEL-2 Auxiliary EOF folder                                    -->
+   <!-- and                                                                -->
    <!-- SENTINEL-2 Auxiliary EOF abstract class                            -->
-   <!-- WARN this class is not a subclass of 'Sentinel-2 Item'             -->
+   <!-- Software use only                                                  -->
+   <!--    (since EOF products can be packaged either as monofiles         -->
+   <!--           or as folder with EOF file inside)                       -->
+   <!-- ================================================================== -->
+
+   <owl:Class rdf:about="&s2;auxiliaryEofAbstract">
+      <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product Abstract class</rdfs:label>
+      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2._...._AUX_(RESORB|PREORB)_.*</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================================================== -->
+   <!-- SENTINEL-2 Auxiliary EOF folder                                    -->
+   <!-- ================================================================== -->
+
+   <owl:Class rdf:about="&s2;auxiliaryEofFolder">
+      <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product Folder</rdfs:label>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryEofAbstract"/>
+      <drb:signature rdf:parseType="Resource">
+         <drb:nameMatch>S2._...._AUX_(RESORB|PREORB)_...._[0-9]{8}T[0-9]{6}_V[0-9]{8}T[0-9]{6}_[0-9]{8}T[0-9]{6}</drb:nameMatch>
+      </drb:signature>
+   </owl:Class>
+
+   <!-- ================================================================== -->
+   <!-- SENTINEL-2 Auxiliary EOF abstract class                            -->
    <!-- ================================================================== -->
 
    <owl:Class rdf:about="&s2;auxiliaryEof">
       <rdfs:label xml:lang="en">SENTINEL-2 EOF Auxiliary Product</rdfs:label>
-      <rdfs:subClassOf rdf:resource="&s2;item"/>
+      <rdfs:subClassOf rdf:resource="&s2;auxiliaryEofAbstract"/>
       <drb:signature rdf:parseType="Resource">
          <drb:nameMatch>S2._...._.*\.EOF</drb:nameMatch>
       </drb:signature>
